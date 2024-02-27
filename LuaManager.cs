@@ -54,6 +54,12 @@ namespace LuaEngine
 
             var core = new LuaCore();
             RegisterModule(core);
+
+            var engine = new LuaUnityEngine();
+            RegisterModule(engine);
+
+            var worldHandler = new LuaWorldHandler();
+            RegisterModule(worldHandler);
         }
 
         private void RegisterModule(ILuaModule module)
