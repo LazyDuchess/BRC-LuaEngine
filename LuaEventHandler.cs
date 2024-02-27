@@ -11,7 +11,6 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaEventHandler
     {
-        private List<DynValue> _callbacks = [];
         private Dictionary<string, DynValue> _callbackByGUID = [];
         private Script _script = null;
 
@@ -25,7 +24,6 @@ namespace LuaEngine
         {
             var guid = Guid.NewGuid().ToString();
             _callbackByGUID[guid] = callback;
-            _callbacks.Add(callback);
             return guid;
         }
 
@@ -33,7 +31,6 @@ namespace LuaEngine
         {
             if (_callbackByGUID.TryGetValue(callbackGUID, out var callback))
             {
-                _callbacks.Remove(callback);
                 _callbackByGUID.Remove(callbackGUID);
             }
         }
@@ -41,9 +38,9 @@ namespace LuaEngine
         [MoonSharpHidden]
         public void Invoke(params object[] args)
         {
-            foreach(var callback in _callbacks)
+            foreach(var callback in _callbackByGUID)
             {
-                _script.Call(callback, args);
+                _script.Call(callback.Value, args);
             }
         }
     }
