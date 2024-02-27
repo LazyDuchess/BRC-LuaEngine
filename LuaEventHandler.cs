@@ -29,7 +29,7 @@ namespace LuaEngine
 
         public void Remove(string callbackGUID)
         {
-            if (_callbackByGUID.TryGetValue(callbackGUID, out var callback))
+            if (_callbackByGUID.TryGetValue(callbackGUID, out var _))
             {
                 _callbackByGUID.Remove(callbackGUID);
             }
