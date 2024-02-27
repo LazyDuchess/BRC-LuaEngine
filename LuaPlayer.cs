@@ -1,4 +1,5 @@
-﻿using MoonSharp.Interpreter;
+﻿using MonoMod.Cil;
+using MoonSharp.Interpreter;
 using Reptile;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,15 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInComponent
     {
+        public string AbilityName
+        {
+            get
+            {
+                if (_handle.ability == null)
+                    return null;
+                return _handle.ability.GetType().Name;
+            }
+        }
         public bool IsTooBusyForSuddenCutscenes => _handle.IsTooBusyForSuddenCutscenes();
         public bool IsBusyWithSequence => _handle.IsBusyWithSequence();
         public bool IsDead => _handle.IsDead();
@@ -41,6 +51,16 @@ namespace LuaEngine
         public void AddBoostCharge(float amount)
         {
             _handle.AddBoostCharge(amount);
+        }
+
+        public void SetRotation(float forwardX, float forwardY, float forwardZ)
+        {
+            _handle.SetRotation(new Vector3(forwardX, forwardY, forwardZ));
+        }
+
+        public void SetRotationHard(float forwardX, float forwardY, float forwardZ)
+        {
+            _handle.SetRotHard(new Vector3(forwardX, forwardY, forwardZ));
         }
     }
 }

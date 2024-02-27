@@ -58,5 +58,11 @@ namespace LuaEngine
             var axis = new Vector3(xAxis, yAxis, zAxis);
             _handle.transform.Rotate(axis, angle);
         }
+
+        public float[] GetForward()
+        {
+            var forward = _handle.transform.forward;
+            return [forward.x, forward.y, forward.z];
+        }
     }
 }
