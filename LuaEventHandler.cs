@@ -37,6 +37,7 @@ namespace LuaEngine
             }
         }
 
+        [MoonSharpHidden]
         public void Invoke(params object[] args)
         {
             foreach(var callback in _callbacks)

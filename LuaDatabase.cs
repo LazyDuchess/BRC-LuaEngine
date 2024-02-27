@@ -27,6 +27,7 @@ namespace LuaEngine
                     LoadPlugin(luaPath);
                 }
             }
+            AutoRunScripts = AutoRunScripts.OrderBy(script => script.Priority).ToList();
         }
 
         public static void LoadPlugin(string path)
@@ -35,7 +36,7 @@ namespace LuaEngine
             var autorunFiles = Directory.GetFiles(autorunPath, "*.lua");
             foreach(var file in autorunFiles)
             {
-                var script = LuaScript.FromFile(file);
+                var script = LuaScript.FromFile(file, true);
                 if (script != null)
                     AutoRunScripts.Add(script);
             }

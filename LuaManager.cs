@@ -34,7 +34,7 @@ namespace LuaEngine
             RegisterModules();
             foreach(var script in LuaDatabase.AutoRunScripts)
             {
-                _logSource.LogInfo($"Running Autorun Script {script.Name}");
+                _logSource.LogInfo($"Running Autorun Script {script.Name} with priority {script.Priority}");
                 script.Run(GlobalScript);
             }
         }
