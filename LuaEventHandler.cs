@@ -1,6 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace LuaEngine
     public class LuaEventHandler
     {
         private List<DynValue> _callbacks = [];
-        private Dictionary<string, int> _indexByGUID = [];
+        private Dictionary<string, DynValue> _callbackByGUID = [];
         private Script _script = null;
 
         [MoonSharpHidden]
@@ -23,17 +24,17 @@ namespace LuaEngine
         public string Add(DynValue callback)
         {
             var guid = Guid.NewGuid().ToString();
-            _indexByGUID[guid] = _callbacks.Count;
+            _callbackByGUID[guid] = callback;
             _callbacks.Add(callback);
             return guid;
         }
 
         public void Remove(string callbackGUID)
         {
-            if (_indexByGUID.TryGetValue(callbackGUID, out var index))
+            if (_callbackByGUID.TryGetValue(callbackGUID, out var callback))
             {
-                _callbacks.RemoveAt(index);
-                _indexByGUID.Remove(callbackGUID);
+                _callbacks.Remove(callback);
+                _callbackByGUID.Remove(callbackGUID);
             }
         }
 

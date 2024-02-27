@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using HarmonyLib;
 using System;
 
 namespace LuaEngine
@@ -10,6 +11,8 @@ namespace LuaEngine
         {
             try
             {
+                var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+                harmony.PatchAll();
                 LuaDatabase.Initialize(Paths.PluginPath);
                 LuaManager.Create();
                 Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} {PluginInfo.PLUGIN_VERSION} is loaded!");

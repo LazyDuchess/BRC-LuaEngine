@@ -12,7 +12,22 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaGameObject
     {
+        public bool ActiveInHierarchy => _handle.gameObject.activeInHierarchy;
+        public bool Active
+        {
+            get
+            {
+                return _handle.gameObject.activeSelf;
+            }
+            set
+            {
+                _handle.gameObject.SetActive(value);
+            }
+        }
         public int InstanceID => _handle.gameObject.GetInstanceID();
+        public LuaEventHandler OnPlayerTriggerEnter => _handle.OnPlayerTriggerEnter;
+        public LuaEventHandler OnPlayerTriggerStay => _handle.OnPlayerTriggerStay;
+        public LuaEventHandler OnPlayerTriggerExit => _handle.OnPlayerTriggerExit;
         public LuaEventHandler OnDestroyed => _handle.OnDestroyed;
         public string Name
         {
@@ -63,6 +78,19 @@ namespace LuaEngine
         {
             var forward = _handle.transform.forward;
             return [forward.x, forward.y, forward.z];
+        }
+
+        public LuaGameObject Instantiate()
+        {
+            var instance = GameObject.Instantiate(_handle.gameObject);
+            LuaUtility.RemoveAllLuaHooks(instance);
+            var luaHooks = LuaHooks.GetOrMake(_handle.gameObject, _handle.Script);
+            return luaHooks.LuaGameObject;
+        }
+
+        public void Destroy()
+        {
+            GameObject.Destroy(_handle.gameObject);
         }
     }
 }
