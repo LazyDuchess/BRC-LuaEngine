@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using System;
 
 namespace LuaEngine
 {
@@ -7,8 +8,16 @@ namespace LuaEngine
     {
         private void Awake()
         {
-            // Plugin startup logic
-            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            try
+            {
+                LuaDatabase.Initialize(Paths.PluginPath);
+                LuaManager.Create();
+                Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} {PluginInfo.PLUGIN_VERSION} is loaded!");
+            }
+            catch(Exception e)
+            {
+                Logger.LogError($"Plugin {PluginInfo.PLUGIN_GUID} {PluginInfo.PLUGIN_VERSION} failed to load!{Environment.NewLine}{e}");
+            }
         }
     }
 }
