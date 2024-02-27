@@ -12,26 +12,24 @@ namespace LuaEngine.Modules
 {
     public class LuaStageManager : ILuaModule
     {
-        public static LuaStageManager Instance { get; private set; }
-        private LuaBindings _luaBindings = null;
+        private LuaBindings _bindings = null;
 
         public void OnRegister(Script script)
         {
-            Instance = this;
-            _luaBindings = new(script);
+            _bindings = new(script);
             StageManager.OnStageInitialized += StageManager_OnStageInitialized;
             StageManager.OnStagePostInitialization += StageManager_OnStagePostInitialization;
-            script.Globals["StageManager"] = _luaBindings;
+            script.Globals["StageManager"] = _bindings;
         }
 
         private void StageManager_OnStageInitialized()
         {
-            _luaBindings.OnStageInitialized.Invoke();
+            _bindings.OnStageInitialized.Invoke();
         }
 
         private void StageManager_OnStagePostInitialization()
         {
-            _luaBindings.OnStagePostInitialization.Invoke();
+            _bindings.OnStagePostInitialization.Invoke();
         }
 
         [MoonSharpUserData]
@@ -46,6 +44,11 @@ namespace LuaEngine.Modules
             {
                 OnStageInitialized = new(script);
                 OnStagePostInitialization = new(script);
+            }
+
+            public void ExitCurrentStage(int targetStageID, int previousStageID)
+            {
+                Core.Instance.BaseModule.StageManager.ExitCurrentStage((Stage)targetStageID, (Stage)previousStageID);
             }
         }
 

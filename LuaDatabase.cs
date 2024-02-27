@@ -33,7 +33,7 @@ namespace LuaEngine
         public static void LoadPlugin(string path)
         {
             var autorunPath = Path.Combine(path, "autorun");
-            var autorunFiles = Directory.GetFiles(autorunPath, "*.lua");
+            var autorunFiles = Directory.GetFiles(autorunPath, "*.lua", SearchOption.AllDirectories);
             foreach(var file in autorunFiles)
             {
                 var script = LuaScript.FromFile(file, true);

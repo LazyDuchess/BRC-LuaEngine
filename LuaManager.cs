@@ -48,8 +48,12 @@ namespace LuaEngine
             }
 
             _logSource.LogInfo($"Registering Lua modules");
+
             var stageManager = new LuaStageManager();
             RegisterModule(stageManager);
+
+            var core = new LuaCore();
+            RegisterModule(core);
         }
 
         private void RegisterModule(ILuaModule module)
