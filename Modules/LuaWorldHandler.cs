@@ -1,4 +1,5 @@
-﻿using MoonSharp.Interpreter;
+﻿using LuaEngine.Components;
+using MoonSharp.Interpreter;
 using Reptile;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,15 @@ namespace LuaEngine.Modules
         [MoonSharpUserData]
         public class LuaBindings
         {
+            public LuaGameObject CurrentCamera
+            {
+                get
+                {
+                    var worldHandler = WorldHandler.instance;
+                    if (worldHandler == null) return null;
+                    return LuaHooks.GetOrMake(worldHandler.CurrentCamera.gameObject, _script).LuaGameObject;
+                }
+            }
             public LuaPlayer CurrentPlayer
             {
                 get
