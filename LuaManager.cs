@@ -60,6 +60,9 @@ namespace LuaEngine
 
             var worldHandler = new LuaWorldHandler();
             RegisterModule(worldHandler);
+
+            var ui = new LuaUI();
+            RegisterModule(ui);
         }
 
         private void RegisterModule(ILuaModule module)

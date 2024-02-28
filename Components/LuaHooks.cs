@@ -15,8 +15,27 @@ namespace LuaEngine.Components
         public LuaEventHandler OnPlayerTriggerEnter = null;
         public LuaEventHandler OnPlayerTriggerStay = null;
         public LuaEventHandler OnPlayerTriggerExit = null;
+
+        public LuaEventHandler OnAnyTriggerEnter = null;
+        public LuaEventHandler OnAnyTriggerStay = null;
+        public LuaEventHandler OnAnyTriggerExit = null;
         [MoonSharpHidden]
         public Script Script = null;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            OnAnyTriggerEnter?.Invoke(LuaHooks.GetOrMake(other.gameObject, Script).LuaGameObject);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            OnAnyTriggerStay?.Invoke(LuaHooks.GetOrMake(other.gameObject, Script).LuaGameObject);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            OnAnyTriggerExit?.Invoke(LuaHooks.GetOrMake(other.gameObject, Script).LuaGameObject);
+        }
 
         public static LuaHooks GetOrMake(GameObject gameObject, Script script)
         {
@@ -47,6 +66,9 @@ namespace LuaEngine.Components
             OnPlayerTriggerEnter = new(script);
             OnPlayerTriggerStay = new(script);
             OnPlayerTriggerExit = new(script);
+            OnAnyTriggerEnter = new(script);
+            OnAnyTriggerStay = new(script);
+            OnAnyTriggerExit = new(script);
         }
 
         private void OnDestroy()
