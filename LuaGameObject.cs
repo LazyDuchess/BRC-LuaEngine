@@ -113,7 +113,7 @@ namespace LuaEngine
         {
             var instance = GameObject.Instantiate(Handle.gameObject);
             LuaUtility.RemoveAllLuaHooks(instance);
-            var luaHooks = LuaHooks.GetOrMake(Handle.gameObject, Handle.Script);
+            var luaHooks = LuaHooks.GetOrMake(instance, Handle.Script);
             return luaHooks.LuaGameObject;
         }
 
