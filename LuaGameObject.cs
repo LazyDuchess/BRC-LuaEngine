@@ -1,6 +1,7 @@
 ﻿using LuaEngine.Components;
 using LuaEngine.Mono;
 using MoonSharp.Interpreter;
+using Reptile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,24 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaGameObject
     {
+        public Table Velocity
+        {
+            get
+            {
+                var rigidBody = _handle.gameObject.GetComponent<Rigidbody>();
+                if (rigidBody == null)
+                    return LuaMathUtils.Vector3ToTable(Vector3.zero);
+                return LuaMathUtils.Vector3ToTable(rigidBody.velocity);
+            }
+
+            set
+            {
+                var rigidBody = _handle.gameObject.GetComponent<Rigidbody>();
+                if (rigidBody == null)
+                    return;
+                rigidBody.velocity = LuaMathUtils.TableToVector3(value);
+            }
+        }
         public bool ActiveInHierarchy => _handle.gameObject.activeInHierarchy;
         public bool Active
         {
@@ -41,6 +60,14 @@ namespace LuaEngine
         public LuaGameObject(LuaHooks handle)
         {
             _handle = handle;
+        }
+
+        public LuaGameObject FindRecursive(string name)
+        {
+            var child = _handle.gameObject.transform.FindRecursive(name);
+            if (child == null)
+                return null;
+            return LuaHooks.GetOrMake(child.gameObject, LuaManager.Instance.GlobalScript).LuaGameObject;
         }
 
         public Table GetPosition()
