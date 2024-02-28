@@ -47,5 +47,11 @@ namespace LuaEngine
         {
             script.DoString(Body, null, Name);
         }
+
+        public void RunInContext(Script script, LuaGameObject gameObject)
+        {
+            script.Globals["GameObject"] = gameObject;
+            script.DoString(Body, null, Name);
+        }
     }
 }

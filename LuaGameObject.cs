@@ -1,4 +1,5 @@
 ﻿using LuaEngine.Components;
+using LuaEngine.Mono;
 using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
@@ -42,42 +43,39 @@ namespace LuaEngine
             _handle = handle;
         }
 
-        public float[] GetPosition()
+        public Table GetPosition()
         {
-            return [_handle.transform.position.x, _handle.transform.position.y, _handle.transform.position.z];
+            return LuaMathUtils.Vector3ToTable(_handle.transform.position);
         }
 
-        public void SetPosition(float x, float y, float z)
+        public void SetPosition(Table position)
         {
-            _handle.transform.position = new Vector3(x, y, z);
+            _handle.transform.position = LuaMathUtils.TableToVector3(position);
         }
 
-        public void AddPosition(float x, float y, float z)
+        public void AddPosition(Table offset)
         {
-            _handle.transform.position += new Vector3(x, y, z);
+            _handle.transform.position += LuaMathUtils.TableToVector3(offset);
         }
 
-        public float[] GetEulerAngles()
+        public Table GetEulerAngles()
         {
-            var eulerAngles = _handle.transform.eulerAngles;
-            return [eulerAngles.x, eulerAngles.y, eulerAngles.z];
+            return LuaMathUtils.Vector3ToTable(_handle.transform.eulerAngles);
         }
 
-        public void SetEulerAngles(float x, float y, float z)
+        public void SetEulerAngles(Table eulerAngles)
         {
-            _handle.transform.rotation = Quaternion.Euler(x, y, z);
+            _handle.transform.rotation = Quaternion.Euler(LuaMathUtils.TableToVector3(eulerAngles));
         }
 
-        public void Rotate(float xAxis, float yAxis, float zAxis, float angle)
+        public void Rotate(Table axis, float angle)
         {
-            var axis = new Vector3(xAxis, yAxis, zAxis);
-            _handle.transform.Rotate(axis, angle);
+            _handle.transform.Rotate(LuaMathUtils.TableToVector3(axis), angle);
         }
 
-        public float[] GetForward()
+        public Table GetForward()
         {
-            var forward = _handle.transform.forward;
-            return [forward.x, forward.y, forward.z];
+            return LuaMathUtils.Vector3ToTable(_handle.transform.forward);
         }
 
         public LuaGameObject Instantiate()
@@ -91,6 +89,14 @@ namespace LuaEngine
         public void Destroy()
         {
             GameObject.Destroy(_handle.gameObject);
+        }
+
+        public LuaScriptBehavior AddScriptBehavior(string scriptFilename)
+        {
+            var scriptBehavior = _handle.gameObject.AddComponent<ScriptBehavior>();
+            scriptBehavior.LuaScriptName = scriptFilename;
+            scriptBehavior.Initialize();
+            return new LuaScriptBehavior(scriptBehavior, LuaManager.Instance.GlobalScript);
         }
     }
 }

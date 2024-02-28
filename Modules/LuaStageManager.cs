@@ -35,7 +35,7 @@ namespace LuaEngine.Modules
         [MoonSharpUserData]
         public class LuaBindings
         {
-            public LuaStage CurrentStage => new LuaStage(Utility.GetCurrentStage());
+            public int CurrentStage => (int)Utility.GetCurrentStage();
             public LuaEventHandler OnStageInitialized = null;
             public LuaEventHandler OnStagePostInitialization = null;
 
@@ -50,20 +50,24 @@ namespace LuaEngine.Modules
             {
                 Core.Instance.BaseModule.StageManager.ExitCurrentStage((Stage)targetStageID, (Stage)previousStageID);
             }
-        }
 
-        [MoonSharpUserData]
-        public class LuaStage
-        {
-            public string DisplayName => Core.Instance.Localizer.GetStageName(_stage);
-            public int ID => (int)_stage;
-            public string InternalName => _stage.ToString();
-            private Stage _stage = Stage.NONE;
-
-            [MoonSharpHidden]
-            public LuaStage(Stage stage)
+            public string GetInternalNameForStageID(int stageID)
             {
-                _stage = stage;
+                return ((Stage)stageID).ToString();
+            }
+
+            public string GetLocalizedNameForStageID(int stageID)
+            {
+                return Core.Instance.Localizer.GetStageName((Stage)stageID);
+            }
+
+            public int GetStageIDForInternalName(string stageInternalName)
+            {
+                if (Enum.TryParse<Stage>(stageInternalName, out var result))
+                {
+                    return (int)result;
+                }
+                return (int)Stage.NONE;
             }
         }
     }

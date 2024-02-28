@@ -13,6 +13,29 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInComponent
     {
+        public float NormalizedHP => _handle.GetNormalizedHP();
+        public float MaxHP
+        {
+            get
+            {
+                return _handle.maxHP;
+            }
+            set
+            {
+                _handle.maxHP = value;
+            }
+        }
+        public float HP
+        {
+            get
+            {
+                return _handle.HP;
+            }
+            set
+            {
+                _handle.HP = value;
+            }
+        }
         public string AbilityName
         {
             get
@@ -53,14 +76,46 @@ namespace LuaEngine
             _handle.AddBoostCharge(amount);
         }
 
-        public void SetRotation(float forwardX, float forwardY, float forwardZ)
+        public void SetRotation(Table forward)
         {
-            _handle.SetRotation(new Vector3(forwardX, forwardY, forwardZ));
+            _handle.SetRotation(LuaMathUtils.TableToVector3(forward));
         }
 
-        public void SetRotationHard(float forwardX, float forwardY, float forwardZ)
+        public void SetRotationHard(Table forward)
         {
-            _handle.SetRotHard(new Vector3(forwardX, forwardY, forwardZ));
+            _handle.SetRotHard(LuaMathUtils.TableToVector3(forward));
+        }
+
+        public void GetHit(int damage, Table damageDirection, string knockbackType)
+        {
+            var parsedKnockbackType = KnockbackAbility.KnockbackType.NO_KNOCKBACK;
+            switch (knockbackType)
+            {
+                case "Stationary":
+                    parsedKnockbackType = KnockbackAbility.KnockbackType.STATIONARY;
+                    break;
+                case "Far":
+                    parsedKnockbackType = KnockbackAbility.KnockbackType.FAR;
+                    break;
+                case "Big":
+                    parsedKnockbackType = KnockbackAbility.KnockbackType.BIG;
+                    break;
+                case "ShieldBash":
+                    parsedKnockbackType = KnockbackAbility.KnockbackType.SHIELDBASH;
+                    break;
+                case "Fall":
+                    parsedKnockbackType = KnockbackAbility.KnockbackType.FALL;
+                    break;
+                case "None":
+                    parsedKnockbackType = KnockbackAbility.KnockbackType.NO_KNOCKBACK;
+                    break;
+            }
+            _handle.GetHit(damage, LuaMathUtils.TableToVector3(damageDirection), parsedKnockbackType);
+        }
+
+        public void ChangeHP(int damage)
+        {
+            _handle.ChangeHP(damage);
         }
     }
 }
