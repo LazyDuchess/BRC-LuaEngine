@@ -13,6 +13,7 @@ namespace LuaEngine
             {
                 var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
                 harmony.PatchAll();
+                LuaCastFactory.Initialize();
                 LuaDatabase.Initialize(Paths.PluginPath);
                 LuaManager.Create();
                 Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} {PluginInfo.PLUGIN_VERSION} is loaded!");

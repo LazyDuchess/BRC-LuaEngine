@@ -71,6 +71,11 @@ namespace LuaEngine
             _handle = player;
         }
 
+        internal static LuaPlayer CastMethod(Player player)
+        {
+            return new LuaPlayer(player, LuaManager.Instance.GlobalScript);
+        }
+
         public void AddBoostCharge(float amount)
         {
             _handle.AddBoostCharge(amount);

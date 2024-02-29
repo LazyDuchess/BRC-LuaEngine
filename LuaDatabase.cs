@@ -14,7 +14,7 @@ namespace LuaEngine
         public static Dictionary<string, LuaScript> BehaviorScripts = null;
         private static ManualLogSource LogSource = null;
 
-        public static void Initialize(string pluginPath)
+        internal static void Initialize(string pluginPath)
         {
             LogSource = BepInEx.Logging.Logger.CreateLogSource("Lua Database");
             AutoRunScripts = new();

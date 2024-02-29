@@ -11,31 +11,38 @@ namespace LuaEngine
 {
     public static class LuaCastFactory
     {
-        public static bool TryCastComponent(Component component, string luaComponentName, out LuaBuiltInComponent result)
-        {
-            var script = LuaManager.Instance.GlobalScript;
-            result = null;
-            switch (luaComponentName)
-            {
-                case "LuaPlayer":
-                    var player = component as Player;
-                    if (player != null)
-                    {
-                        result = new LuaPlayer(player, script);
-                        return true;
-                    }
-                    return false;
+        private static Dictionary<Type, LuaCast> CastFromCSharpType = [];
+        private static Dictionary<string, LuaCast> CastFromLuaTypeName = [];
 
-                case "LuaScriptBehavior":
-                    var scriptBehavior = component as ScriptBehavior;
-                    if (scriptBehavior != null)
-                    {
-                        result = new LuaScriptBehavior(scriptBehavior, script);
-                        return true;
-                    }
-                    return false;
+        internal static void Initialize()
+        {
+            RegisterCasts(
+                LuaCast.Create<LuaPlayer, Player>(LuaPlayer.CastMethod),
+                LuaCast.Create<LuaScriptBehavior, ScriptBehavior>(LuaScriptBehavior.CastMethod)
+                );
+        }
+
+        public static Type GetCSharpTypeFromLuaTypeName(string luaTypeName)
+        {
+            if (CastFromLuaTypeName.TryGetValue(luaTypeName, out var cast))
+                return cast.CSharpType;
+            return null;
+        }
+
+        public static T CastCSharpTypeToLuaType<T>(object CSharpObject) where T : class
+        {
+            if (CastFromCSharpType.TryGetValue(CSharpObject.GetType(), out var cast))
+                return cast.CastMethod(CSharpObject) as T;
+            return null;
+        }
+
+        public static void RegisterCasts(params LuaCast[] casts)
+        {
+            foreach (var cast in casts)
+            {
+                CastFromCSharpType[cast.CSharpType] = cast;
+                CastFromLuaTypeName[cast.LuaType.Name] = cast;
             }
-            return false;
         }
     }
 }

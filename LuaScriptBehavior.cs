@@ -1,5 +1,6 @@
 ﻿using LuaEngine.Mono;
 using MoonSharp.Interpreter;
+using Reptile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,11 @@ namespace LuaEngine
         public LuaScriptBehavior(ScriptBehavior scriptBehavior, Script script) : base(scriptBehavior, script)
         {
             _handle = scriptBehavior;
+        }
+
+        internal static LuaScriptBehavior CastMethod(ScriptBehavior scriptBehavior)
+        {
+            return new LuaScriptBehavior(scriptBehavior, LuaManager.Instance.GlobalScript);
         }
     }
 }

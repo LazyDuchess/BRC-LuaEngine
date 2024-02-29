@@ -40,6 +40,38 @@ namespace LuaEngine.Modules
                 var tmpPro = gameObject.Handle.gameObject.GetComponent<TMP_Text>();
                 return tmpPro.text;
             }
+
+            public void StartScreenShake(string screenShakeType, float duration, bool continuous)
+            {
+                var parsedScreenShakeType = ScreenShakeType.LIGHT;
+                switch (screenShakeType)
+                {
+                    case "Light":
+                        parsedScreenShakeType = ScreenShakeType.LIGHT;
+                        break;
+
+                    case "Medium":
+                        parsedScreenShakeType = ScreenShakeType.MEDIUM;
+                        break;
+
+                    case "Heavy":
+                        parsedScreenShakeType = ScreenShakeType.HEAVY;
+                        break;
+
+                    case "ExtraLight":
+                        parsedScreenShakeType = ScreenShakeType.EXTRALIGHT;
+                        break;
+
+                    case "JustABitLighter":
+                        parsedScreenShakeType = ScreenShakeType.JUST_A_BIT_LIGHTER;
+                        break;
+
+                    case "UltraLight":
+                        parsedScreenShakeType = ScreenShakeType.ULTRALIGHT;
+                        break;
+                }
+                GameplayCamera.StartScreenShake(parsedScreenShakeType, duration, continuous);
+            }
         }
     }
 }

@@ -124,13 +124,13 @@ namespace LuaEngine
 
         public LuaBuiltInComponent GetLuaComponent(string luaComponentName)
         {
-            var components = Handle.gameObject.GetComponents<Component>();
-            foreach(var component in components)
-            {
-                if (LuaCastFactory.TryCastComponent(component, luaComponentName, out var result))
-                    return result;
-            }
-            return null;
+            var cSharpType = LuaCastFactory.GetCSharpTypeFromLuaTypeName(luaComponentName);
+            if (cSharpType == null)
+                return null;
+            var component = Handle.gameObject.GetComponent(cSharpType);
+            if (component == null)
+                return null;
+            return LuaCastFactory.CastCSharpTypeToLuaType<LuaBuiltInComponent>(component);
         }
     }
 }
