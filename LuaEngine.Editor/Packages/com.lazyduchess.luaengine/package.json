@@ -1,0 +1,16 @@
+{
+  "name": "com.lazyduchess.luaengine",
+  "version": "0.1.0",
+  "displayName": "BRC LuaEngine",
+  "description": "LuaEngine addon for Bomb Rush Cyberfunk",
+  "unity": "2021.3",
+  "unityRelease": "27f1",
+  "documentationUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/wiki",
+  "changelogUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/blob/master/CHANGELOG.md",
+  "licensesUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/blob/master/LICENSE.md",
+  "author": {
+    "name": "Lazy Duchess",
+    "email": "lattechariot@gmail.com",
+    "url": "https://www.lazyduchess.me"
+  }
+}
