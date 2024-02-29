@@ -13,6 +13,17 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaGameObject
     {
+        public LuaGameObject Parent
+        {
+            get
+            {
+                return new LuaGameObject(Handle.transform.parent.gameObject);
+            }
+            set
+            {
+                Handle.transform.SetParent(value.Handle.transform, true);
+            }
+        }
         public Table Velocity
         {
             get
@@ -59,12 +70,30 @@ namespace LuaEngine
             Handle = handle;
         }
 
+        public LuaGameObject Find(string name)
+        {
+            var child = Handle.gameObject.transform.Find(name);
+            if (child == null)
+                return null;
+            return new LuaGameObject(child.gameObject);
+        }
+
         public LuaGameObject FindRecursive(string name)
         {
             var child = Handle.gameObject.transform.FindRecursive(name);
             if (child == null)
                 return null;
             return new LuaGameObject(child.gameObject);
+        }
+
+        public Table GetLocalPosition()
+        {
+            return LuaMathUtils.Vector3ToTable(Handle.transform.localPosition);
+        }
+
+        public void SetLocalPosition(Table position)
+        {
+            Handle.transform.localPosition = LuaMathUtils.TableToVector3(position);
         }
 
         public Table GetPosition()
@@ -80,6 +109,16 @@ namespace LuaEngine
         public void AddPosition(Table offset)
         {
             Handle.transform.position += LuaMathUtils.TableToVector3(offset);
+        }
+
+        public Table GetLocalEulerAngles()
+        {
+            return LuaMathUtils.Vector3ToTable(Handle.transform.localEulerAngles);
+        }
+
+        public void SetLocalEulerAngles(Table eulerAngles)
+        {
+            Handle.transform.localRotation = Quaternion.Euler(LuaMathUtils.TableToVector3(eulerAngles));
         }
 
         public Table GetEulerAngles()
@@ -131,6 +170,23 @@ namespace LuaEngine
             if (component == null)
                 return null;
             return LuaCastFactory.CastCSharpTypeToLuaType<LuaBuiltInComponent>(component);
+        }
+
+        public LuaScriptBehavior GetScriptBehavior(string scriptFilename)
+        {
+            var behaviors = Handle.GetComponents<ScriptBehavior>();
+            foreach(var behavior in behaviors)
+            {
+                if (behavior.LuaScriptName == scriptFilename)
+                    return new LuaScriptBehavior(behavior, LuaManager.Instance.GlobalScript);
+            }
+            return null;
+        }
+
+        public static LuaGameObject New(string name)
+        {
+            var gameObject = new GameObject(name);
+            return new LuaGameObject(gameObject);
         }
     }
 }

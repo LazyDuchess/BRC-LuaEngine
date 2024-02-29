@@ -11,6 +11,7 @@ namespace LuaEngine.Modules
         {
             _bindings = new(script);
             script.Globals["Engine"] = _bindings;
+            script.Globals["LuaGameObject"] = typeof(LuaGameObject);
         }
 
         [MoonSharpUserData]

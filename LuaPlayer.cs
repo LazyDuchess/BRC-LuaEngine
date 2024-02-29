@@ -13,6 +13,8 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
+        public int MoveStyleEquipped => (int)_handle.moveStyleEquipped;
+        public int MoveStyle => (int)_handle.moveStyle;
         public float NormalizedHP => _handle.GetNormalizedHP();
         public float MaxHP
         {
@@ -121,6 +123,16 @@ namespace LuaEngine
         public void ChangeHP(int damage)
         {
             _handle.ChangeHP(damage);
+        }
+
+        public void SetCurrentMoveStyleEquipped(int moveStyle)
+        {
+            _handle.SetCurrentMoveStyleEquipped((MoveStyle)moveStyle);
+        }
+
+        public void SwitchToEquippedMovestyle(bool set, bool doAirTrick, bool showEffect)
+        {
+            _handle.SwitchToEquippedMovestyle(set, doAirTrick, true, showEffect);
         }
     }
 }
