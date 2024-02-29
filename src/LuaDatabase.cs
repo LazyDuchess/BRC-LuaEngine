@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,43 +20,46 @@ namespace LuaEngine
             LogSource = BepInEx.Logging.Logger.CreateLogSource("Lua Database");
             AutoRunScripts = new();
             BehaviorScripts = new();
-            var pluginPaths = Directory.GetDirectories(pluginPath);
-            foreach (var plugin in pluginPaths)
+            var pluginZips = Directory.GetFiles(pluginPath, "*.luamod", SearchOption.AllDirectories);
+            foreach(var pluginZip in pluginZips)
             {
-                var luaPath = Path.Combine(plugin, "lua");
-                if (Directory.Exists(luaPath))
-                {
-                    LogSource.LogInfo($"Loading Lua scripts for Plugin {Path.GetFileName(plugin)}");
-                    LoadPlugin(luaPath);
-                }
+                LogSource.LogInfo($"Loading Lua scripts in {pluginZip}");
+                LoadPluginZip(pluginZip);
             }
             AutoRunScripts = AutoRunScripts.OrderBy(script => script.Priority).ToList();
         }
 
-        public static void LoadPlugin(string path)
+        public static void LoadPluginZip(string zipPath)
         {
-            var autorunPath = Path.Combine(path, "autorun");
-
-            if (Directory.Exists(autorunPath))
+            var zip = ZipFile.OpenRead(zipPath);
+            foreach(var entry in zip.Entries)
             {
-                var autorunFiles = Directory.GetFiles(autorunPath, "*.lua", SearchOption.AllDirectories);
-                foreach (var file in autorunFiles)
+                if (entry.Name.EndsWith(".lua"))
                 {
-                    var script = LuaScript.FromFile(file, true);
-                    if (script != null)
-                        AutoRunScripts.Add(script);
+                    var body = ReadStringZipEntry(entry);
+                    if (entry.FullName.StartsWith("autorun/"))
+                    {
+                        var script = LuaScript.FromString(entry.Name, body, true);
+                        if (script != null)
+                            AutoRunScripts.Add(script);
+                    }
+                    else if (entry.FullName.StartsWith("behavior/"))
+                    {
+                        var script = LuaScript.FromString(entry.Name, body, true);
+                        if (script != null)
+                            BehaviorScripts[script.Name] = script;
+                    }
                 }
             }
-            var behaviorPath = Path.Combine(path, "behavior");
+        }
 
-            if (Directory.Exists(behaviorPath))
+        private static string ReadStringZipEntry(ZipArchiveEntry entry)
+        {
+            using(var stream = entry.Open())
             {
-                var behaviorFiles = Directory.GetFiles(behaviorPath, "*.lua", SearchOption.AllDirectories);
-                foreach (var file in behaviorFiles)
+                using (var reader = new StreamReader(stream))
                 {
-                    var script = LuaScript.FromFile(file);
-                    if (script != null)
-                        BehaviorScripts[script.Name] = script;
+                    return reader.ReadToEnd();
                 }
             }
         }

@@ -17,12 +17,11 @@ namespace LuaEngine
         public string Body = "";
         public int Priority = 0;
 
-        public static LuaScript FromFile(string filename, bool usePriority = false)
+        public static LuaScript FromString(string name, string body, bool usePriority = false)
         {
-            if (!File.Exists(filename)) return null;
             var script = new LuaScript();
-            script.Body = File.ReadAllText(filename);
-            script.Name = Path.GetFileName(filename);
+            script.Body = body;
+            script.Name = name;
             if (usePriority)
             {
                 using (var reader = new StringReader(script.Body))
