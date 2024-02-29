@@ -54,6 +54,7 @@ namespace LuaEngine
         {
             var contextBody = AddLocalContext(script, Body, "script", scriptBehavior);
             script.DoString(contextBody, null, Name);
+            RemoveLocalContext(script, "script");
         }
 
         private string AddLocalContext(Script script, string body, string variableName, object variableValue)
@@ -64,6 +65,11 @@ namespace LuaEngine
             sb.AppendLine($"{InternalVariablePrefix}{variableName} = nil");
             sb.AppendLine(body);
             return sb.ToString();
+        }
+
+        private void RemoveLocalContext(Script script, string variableName)
+        {
+            script.Globals[$"{InternalVariablePrefix}{variableName}"] = DynValue.Nil;
         }
     }
 }
