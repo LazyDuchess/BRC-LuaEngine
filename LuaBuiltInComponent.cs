@@ -1,5 +1,4 @@
-﻿using LuaEngine.Components;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace LuaEngine
         public LuaBuiltInComponent(Component component, Script script)
         {
             Handle = component;
-            GameObject = LuaHooks.GetOrMake(component.gameObject, script).LuaGameObject;
+            GameObject = new LuaGameObject(component.gameObject);
         }
     }
 }

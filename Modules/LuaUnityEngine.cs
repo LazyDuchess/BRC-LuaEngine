@@ -1,5 +1,4 @@
-﻿using LuaEngine.Components;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,8 +28,7 @@ namespace LuaEngine.Modules
                 var objectList = new List<LuaGameObject>();
                 foreach(var obj in objectArray)
                 {
-                    var luaHooks = LuaHooks.GetOrMake(obj, _script);
-                    objectList.Add(luaHooks.LuaGameObject);
+                    objectList.Add(new LuaGameObject(obj));
                 }
                 return objectList;
             }
@@ -38,12 +36,9 @@ namespace LuaEngine.Modules
             public LuaGameObject FindGameObjectByName(string name)
             {
                 var gameObject = GameObject.Find(name);
-                if (gameObject != null)
-                {
-                    var luaHook = LuaHooks.GetOrMake(gameObject, _script);
-                    return luaHook.LuaGameObject;
-                }
-                return null;
+                if (gameObject == null)
+                    return null;
+                return new LuaGameObject(gameObject);
             }
         }
     }

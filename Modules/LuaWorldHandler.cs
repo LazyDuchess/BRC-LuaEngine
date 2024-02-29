@@ -1,5 +1,4 @@
-﻿using LuaEngine.Components;
-using MoonSharp.Interpreter;
+﻿using MoonSharp.Interpreter;
 using Reptile;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace LuaEngine.Modules
                 {
                     var worldHandler = WorldHandler.instance;
                     if (worldHandler == null) return null;
-                    return LuaHooks.GetOrMake(worldHandler.CurrentCamera.gameObject, _script).LuaGameObject;
+                    return new LuaGameObject(worldHandler.currentCamera.gameObject);
                 }
             }
             public LuaPlayer CurrentPlayer

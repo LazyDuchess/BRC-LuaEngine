@@ -1,4 +1,4 @@
-﻿using LuaEngine.Components;
+﻿using LuaEngine.Mono;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,20 +10,13 @@ namespace LuaEngine
 {
     public static class LuaUtility
     {
-        public static T GetComponent<T>(GameObject gameObject) where T : Component
-        {
-            var comp = gameObject.GetComponent<T>();
-            if (comp == null)
-                return gameObject.GetComponentInParent<T>();
-            return comp;
-        }
 
-        public static void RemoveAllLuaHooks(GameObject gameObject)
+        public static void OnInstantiate(GameObject gameObject)
         {
-            var luaHooks = gameObject.GetComponentsInChildren<LuaHooks>(true);
-            foreach(var luaHook in luaHooks)
+            var luaScripts = gameObject.GetComponentsInChildren<ScriptBehavior>(true);
+            foreach(var luaScript in luaScripts)
             {
-                GameObject.DestroyImmediate(luaHook);
+                luaScript.Restart();
             }
         }
     }

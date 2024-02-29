@@ -11,7 +11,7 @@ using UnityEngine;
 namespace LuaEngine
 {
     [MoonSharpUserData]
-    public class LuaPlayer : LuaBuiltInComponent
+    public class LuaPlayer : LuaBuiltInBehaviour
     {
         public float NormalizedHP => _handle.GetNormalizedHP();
         public float MaxHP

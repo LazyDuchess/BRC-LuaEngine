@@ -1,6 +1,7 @@
 ﻿using MoonSharp.Interpreter;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace LuaEngine
 {
     public class LuaScript
     {
+        private const string InternalVariablePrefix = "_LUAENGINE_INTERNAL_";
         private const string PriorityPrefix = "--PRIORITY:";
         public string Name = "";
         public string Body = "";
@@ -48,10 +50,20 @@ namespace LuaEngine
             script.DoString(Body, null, Name);
         }
 
-        public void RunInContext(Script script, LuaGameObject gameObject)
+        public void RunForScriptBehavior(Script script, LuaScriptBehavior scriptBehavior)
         {
-            script.Globals["GameObject"] = gameObject;
-            script.DoString(Body, null, Name);
+            var contextBody = AddLocalContext(script, Body, "script", scriptBehavior);
+            script.DoString(contextBody, null, Name);
+        }
+
+        private string AddLocalContext(Script script, string body, string variableName, object variableValue)
+        {
+            script.Globals[$"{InternalVariablePrefix}{variableName}"] = variableValue;
+            var sb = new StringBuilder();
+            sb.AppendLine($"local {variableName} = {InternalVariablePrefix}{variableName}");
+            sb.AppendLine($"{InternalVariablePrefix}{variableName} = nil");
+            sb.AppendLine(body);
+            return sb.ToString();
         }
     }
 }

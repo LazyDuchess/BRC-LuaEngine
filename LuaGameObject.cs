@@ -1,5 +1,4 @@
-﻿using LuaEngine.Components;
-using LuaEngine.Mono;
+﻿using LuaEngine.Mono;
 using MoonSharp.Interpreter;
 using Reptile;
 using System;
@@ -45,23 +44,17 @@ namespace LuaEngine
             }
         }
         public int InstanceID => Handle.gameObject.GetInstanceID();
-        public LuaEventHandler OnTriggerEnter => Handle.OnAnyTriggerEnter;
-        public LuaEventHandler OnTriggerStay => Handle.OnAnyTriggerStay;
-        public LuaEventHandler OnTriggerExit => Handle.OnAnyTriggerExit;
-        public LuaEventHandler OnPlayerTriggerEnter => Handle.OnPlayerTriggerEnter;
-        public LuaEventHandler OnPlayerTriggerStay => Handle.OnPlayerTriggerStay;
-        public LuaEventHandler OnPlayerTriggerExit => Handle.OnPlayerTriggerExit;
-        public LuaEventHandler OnDestroyed => Handle.OnDestroyed;
+
         public string Name
         {
             get { return Handle.gameObject.name; }
             set { Handle.gameObject.name = value; }
         }
         [MoonSharpHidden]
-        public LuaHooks Handle = null;
+        public GameObject Handle = null;
 
         [MoonSharpHidden]
-        public LuaGameObject(LuaHooks handle)
+        public LuaGameObject(GameObject handle)
         {
             Handle = handle;
         }
@@ -71,7 +64,7 @@ namespace LuaEngine
             var child = Handle.gameObject.transform.FindRecursive(name);
             if (child == null)
                 return null;
-            return LuaHooks.GetOrMake(child.gameObject, LuaManager.Instance.GlobalScript).LuaGameObject;
+            return new LuaGameObject(child.gameObject);
         }
 
         public Table GetPosition()
@@ -112,9 +105,8 @@ namespace LuaEngine
         public LuaGameObject Instantiate()
         {
             var instance = GameObject.Instantiate(Handle.gameObject);
-            LuaUtility.RemoveAllLuaHooks(instance);
-            var luaHooks = LuaHooks.GetOrMake(instance, Handle.Script);
-            return luaHooks.LuaGameObject;
+            LuaUtility.OnInstantiate(instance);
+            return new LuaGameObject(instance);
         }
 
         public void Destroy()
