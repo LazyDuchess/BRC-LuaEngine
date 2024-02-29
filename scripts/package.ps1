@@ -89,8 +89,26 @@ function CreatePluginZip(){
     ExtractZip $zipPath
 }
 
+function CreatePackageZip(){
+	$zipPath = "Build/com.lazyduchess.luaengine.zip"
+	$zip = CreateZip $zipPath
+	
+	Push-Location "LuaEngine.Editor/Packages/com.lazyduchess.luaengine"
+    Get-ChildItem -Recurse './' | ForEach-Object {
+        $path = ($_ | Resolve-Path -Relative).Replace('.\', '')
+		if(Test-Path -Path $_.FullName -PathType leaf){
+			AddToZip $zip $_.FullName $path
+		}
+    }
+    Pop-Location
+	$zip.Dispose()
+	
+	ExtractZip $zipPath
+}
+
 Clean
 dotnet build -c $Configuration
 EnsureDir "Build"
 CreatePluginZip
+CreatePackageZip
 
