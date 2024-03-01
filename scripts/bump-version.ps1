@@ -2,7 +2,7 @@ param(
     [switch]$major = $False,
     [switch]$minor = $False,
     [switch]$patch = $False,
-    [switch]$git = $True
+    [switch]$nogit = $False
 )
 
 $ErrorActionPreference = 'Stop'
@@ -10,6 +10,10 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 Set-Location $PSScriptRoot/..
 [Environment]::CurrentDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
+
+if($Null -ne $(git status --untracked-files=no --porcelain=v1)) {
+        Write-Error "Git status shows modified files. This script cannot commit a new version while there are uncommitted, modified files."
+}
 
 if($major){
     $minor = $False
@@ -54,7 +58,7 @@ else{
 
 $newVersion = "$majorVersion.$minorVersion.$patchVersion"
 
-Write-Output "Bumping from $version to $newVersion"
+Write-Host "Bumping from $version to $newVersion"
 
 $projxml.Project.PropertyGroup[0].Version = $newVersion
 $projxml.Save($csprojPath)
@@ -78,4 +82,19 @@ $package = Get-Content $packagePath -raw | ConvertFrom-Json
 $package.version = $newVersion
 $package | ConvertTo-Json -depth 32| set-content $packagePath
 
-Write-Output "Bumped all versions!"
+Write-Host "Bumped all versions!"
+
+if($noit){
+    return;
+}
+
+Write-Host "Making Git Tag"
+
+git add `
+        $packagePath `
+        $editorVersionCSPath `
+        $csprojPath `
+git commit -m "v$newVersion"
+git tag $newVersion
+
+Write-Host -ForegroundColor Green "Don't forget to 'git push --tags'"
