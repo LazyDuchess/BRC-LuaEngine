@@ -26,7 +26,6 @@ namespace LuaEngine
                 LogSource.LogInfo($"Loading Lua scripts in {pluginZip}");
                 LoadPluginZip(pluginZip);
             }
-            AutoRunScripts = AutoRunScripts.OrderBy(script => script.Priority).ToList();
         }
 
         public static void LoadPluginZip(ZipArchive archive)

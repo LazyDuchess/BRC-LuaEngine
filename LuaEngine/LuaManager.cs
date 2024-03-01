@@ -32,7 +32,12 @@ namespace LuaEngine
             GlobalScript = new();
             GlobalScript.Options.DebugPrint = message => { _scriptLogSource.LogInfo(message); };
             RegisterModules();
-            foreach(var script in LuaDatabase.AutoRunScripts)
+        }
+
+        private void Start()
+        {
+            LuaDatabase.AutoRunScripts = LuaDatabase.AutoRunScripts.OrderBy(script => script.Priority).ToList();
+            foreach (var script in LuaDatabase.AutoRunScripts)
             {
                 _logSource.LogInfo($"Running Autorun Script {script.Name} with priority {script.Priority}");
                 script.Run(GlobalScript);
