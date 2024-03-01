@@ -20,7 +20,9 @@ namespace LuaEngine
                 LuaCast.Create<LuaPlayer, Player>(LuaPlayer.CastMethod),
                 LuaCast.Create<LuaScriptBehavior, ScriptBehavior>(LuaScriptBehavior.CastMethod),
                 LuaCast.Create<LuaAnimator, Animator>(LuaAnimator.CastMethod),
-                LuaCast.Create<LuaAudioSource, AudioSource>(LuaAudioSource.CastMethod)
+                LuaCast.Create<LuaAudioSource, AudioSource>(LuaAudioSource.CastMethod),
+                LuaCast.Create<LuaScriptStringValue, ScriptStringValue>(LuaScriptStringValue.CastMethod),
+                LuaCast.Create<LuaScriptNumberValue, ScriptNumberValue>(LuaScriptNumberValue.CastMethod)
                 );
         }
 

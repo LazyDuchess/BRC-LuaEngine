@@ -188,5 +188,43 @@ namespace LuaEngine
             var gameObject = new GameObject(name);
             return new LuaGameObject(gameObject);
         }
+
+        public LuaScriptStringValue GetStringValue(string name)
+        {
+            var allStringValues = Handle.GetComponents<ScriptStringValue>();
+            foreach(var stringValue in allStringValues)
+            {
+                if (stringValue.Name == name)
+                    return new LuaScriptStringValue(stringValue, LuaManager.Instance.GlobalScript);
+            }
+            return null;
+        }
+
+        public LuaScriptNumberValue GetNumberValue(string name)
+        {
+            var allNumberValues = Handle.GetComponents<ScriptNumberValue>();
+            foreach (var numberValue in allNumberValues)
+            {
+                if (numberValue.Name == name)
+                    return new LuaScriptNumberValue(numberValue, LuaManager.Instance.GlobalScript);
+            }
+            return null;
+        }
+
+        public void SetStringValue(string name, string value)
+        {
+            var stringValue = GetStringValue(name).Handle;
+            if (stringValue == null)
+                stringValue = Handle.AddComponent<ScriptStringValue>();
+            stringValue.Value = value;
+        }
+
+        public void SetNumberValue(string name, double value)
+        {
+            var numberValue = GetNumberValue(name).Handle;
+            if (numberValue == null)
+                numberValue = Handle.AddComponent<ScriptNumberValue>();
+            numberValue.Value = value;
+        }
     }
 }
