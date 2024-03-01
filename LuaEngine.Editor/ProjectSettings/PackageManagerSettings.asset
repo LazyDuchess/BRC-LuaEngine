@@ -26,7 +26,15 @@ MonoBehaviour:
     m_IsDefault: 1
     m_Capabilities: 7
     m_ConfigSource: 0
-  m_UserSelectedRegistryName: 
+  - m_Id: scoped:project:BRC MapStation
+    m_Name: BRC MapStation
+    m_Url: https://brcmapstation.github.io/PackageRegistry
+    m_Scopes:
+    - com.brcmapstation
+    m_IsDefault: 0
+    m_Capabilities: 0
+    m_ConfigSource: 4
+  m_UserSelectedRegistryName: BRC MapStation
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
