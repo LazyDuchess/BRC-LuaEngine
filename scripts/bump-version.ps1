@@ -2,6 +2,7 @@ param(
     [switch]$major = $False,
     [switch]$minor = $False,
     [switch]$patch = $False,
+    [string]$version,
     [switch]$nogit = $False
 )
 
@@ -15,7 +16,12 @@ if($Null -ne $(git status --untracked-files=no --porcelain=v1)) {
         Write-Error "Git status shows modified files. This script cannot commit a new version while there are uncommitted, modified files."
 }
 
-if($major){
+if ($version){
+    $major = $False
+    $minor = $False
+    $patch = $False
+}
+elseif($major){
     $minor = $False
     $patch = $False
 }
@@ -35,9 +41,9 @@ $csprojPath = "LuaEngine/LuaEngine.csproj"
 
 $projxml = [xml](Get-Content -Path $csprojPath)
 
-$version = $projxml.Project.PropertyGroup[0].Version
+$oldVersion = $projxml.Project.PropertyGroup[0].Version
 
-$versionArray = $version.Split(".")
+$versionArray = $oldVersion.Split(".")
 
 $majorVersion = [int]$versionArray[0]
 $minorVersion = [int]$versionArray[1]
@@ -58,7 +64,11 @@ else{
 
 $newVersion = "$majorVersion.$minorVersion.$patchVersion"
 
-Write-Host "Bumping from $version to $newVersion"
+if($version){
+    $newVersion = $version
+}
+
+Write-Host "Bumping from $oldVersion to $newVersion"
 
 $projxml.Project.PropertyGroup[0].Version = $newVersion
 $projxml.Save($csprojPath)
