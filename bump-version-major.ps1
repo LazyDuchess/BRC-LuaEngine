@@ -1,0 +1,1 @@
+./scripts/bump-version.ps1 -major
