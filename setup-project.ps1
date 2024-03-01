@@ -1,0 +1,1 @@
+./scripts/initialize-project.ps1

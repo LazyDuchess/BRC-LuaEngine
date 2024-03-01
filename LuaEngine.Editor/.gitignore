@@ -2,6 +2,10 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+
+[Pp]ackages/manifest.json
+[Pp]ackages/packages-lock.json
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
