@@ -34,18 +34,20 @@ namespace LuaEngine
             var zip = ZipFile.OpenRead(zipPath);
             foreach(var entry in zip.Entries)
             {
-                if (entry.Name.EndsWith(".lua"))
+                var fullName = entry.FullName.Replace(@"\", "/");
+                var name = entry.Name.Replace(@"\", "/");
+                if (name.EndsWith(".lua"))
                 {
                     var body = ReadStringZipEntry(entry);
-                    if (entry.FullName.StartsWith("autorun/"))
+                    if (fullName.StartsWith("autorun/"))
                     {
-                        var script = LuaScript.FromString(entry.Name, body, true);
+                        var script = LuaScript.FromString(name, body, true);
                         if (script != null)
                             AutoRunScripts.Add(script);
                     }
-                    else if (entry.FullName.StartsWith("behavior/"))
+                    else if (fullName.StartsWith("behavior/"))
                     {
-                        var script = LuaScript.FromString(entry.Name, body, true);
+                        var script = LuaScript.FromString(name, body, true);
                         if (script != null)
                             BehaviorScripts[script.Name] = script;
                     }
