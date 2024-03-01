@@ -9,7 +9,8 @@
   "changelogUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/blob/master/CHANGELOG.md",
   "licensesUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/blob/master/LICENSE.md",
   "dependencies": {
-    "com.brcmapstation.tools": "0.12.0"
+    "com.brcmapstation.tools": "0.12.1",
+	"com.brcmapstation.common": "0.12.1"
   },
   "author": {
     "name": "Lazy Duchess",

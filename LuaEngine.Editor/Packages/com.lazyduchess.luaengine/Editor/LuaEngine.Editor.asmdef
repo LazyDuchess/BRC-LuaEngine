@@ -2,7 +2,8 @@
     "name": "LuaEngine.Editor",
     "rootNamespace": "LuaEngine.Editor",
     "references": [
-        "MapStation.Tools.Editor"
+        "MapStation.Tools.Editor",
+        "MapStation.Common"
     ],
     "includePlatforms": [
         "Editor"
