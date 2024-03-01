@@ -18,7 +18,7 @@ namespace LuaEngine.Editor
         private string MakeLuaZip(string assetPath, string luaPath)
         {
             var luaOutputPath = Path.Combine(assetPath, "lua.luamod");
-            var metaFiles = Directory.GetFiles(luaPath, "*.meta");
+            var metaFiles = Directory.GetFiles(luaPath, "*.meta", SearchOption.AllDirectories);
             foreach(var metaFile in metaFiles)
             {
                 File.Delete(metaFile);
