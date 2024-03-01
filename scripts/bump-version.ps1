@@ -61,13 +61,21 @@ $projxml.Save($csprojPath)
 
 $editorVersionCSPath = "LuaEngine.Editor/Packages/com.lazyduchess.luaengine/Editor/LuaEngineVersion.cs"
 
-$versionString = "namespace LuaEngine.Editor
+$versionString = 'namespace LuaEngine.Editor
 {
     public static class LuaEngineVersion
     {
-        public const string Version = $newVersion;
+        public const string Version = "'+$newVersion+'";
     }
 }
-"
+'
 
 Out-File -FilePath $editorVersionCSPath -InputObject $versionString
+
+$packagePath = "LuaEngine.Editor/Packages/com.lazyduchess.luaengine/package.json"
+
+$package = Get-Content $packagePath -raw | ConvertFrom-Json
+$package.version = $newVersion
+$package | ConvertTo-Json -depth 32| set-content $packagePath
+
+Write-Output "Bumped all versions!"
