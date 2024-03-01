@@ -12,7 +12,7 @@ namespace LuaEngine.Editor
     {
         public override string[] GetDependencies()
         {
-            return new string[] { "LazyDuchess-LuaEngine-0.1.0" };
+            return new string[] { "LazyDuchess-LuaEngine-0.2.0" };
         }
 
         private string MakeLuaZip(string assetPath, string luaPath)
