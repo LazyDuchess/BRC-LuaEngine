@@ -90,10 +90,9 @@ if($noit){
 
 Write-Host "Making Git Tag"
 
-git add `
-        $packagePath `
-        $editorVersionCSPath `
-        $csprojPath `
+git add $packagePath
+git add $editorVersionCSPath
+git add $csprojPath
 git commit -m "v$newVersion"
 git tag $newVersion
 
