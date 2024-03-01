@@ -31,9 +31,9 @@ $csprojPath = "LuaEngine/LuaEngine.csproj"
 
 $projxml = [xml](Get-Content -Path $csprojPath)
 
-$version = $projxml.Project.PropertyGroup.Version
+$version = $projxml.Project.PropertyGroup[0].Version
 
-$versionArray = $version[0].Split(".")
+$versionArray = $version.Split(".")
 
 $majorVersion = [int]$versionArray[0]
 $minorVersion = [int]$versionArray[1]
@@ -56,5 +56,18 @@ $newVersion = "$majorVersion.$minorVersion.$patchVersion"
 
 Write-Output "Bumping from $version to $newVersion"
 
-$projxml.Project.PropertyGroup.Version[0] = $newVersion
+$projxml.Project.PropertyGroup[0].Version = $newVersion
 $projxml.Save($csprojPath)
+
+$editorVersionCSPath = "LuaEngine.Editor/Packages/com.lazyduchess.luaengine/Editor/LuaEngineVersion.cs"
+
+$versionString = "namespace LuaEngine.Editor
+{
+    public static class LuaEngineVersion
+    {
+        public const string Version = $newVersion;
+    }
+}
+"
+
+Out-File -FilePath $editorVersionCSPath -InputObject $versionString
