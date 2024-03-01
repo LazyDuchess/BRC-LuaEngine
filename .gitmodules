@@ -1,0 +1,3 @@
+[submodule "libs/MapStation"]
+	path = libs/MapStation
+	url = https://github.com/BRCMapStation/MapStation

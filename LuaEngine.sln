@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaEngine", "LuaEngine/LuaEngine.csproj", "{229F8CE3-01D9-4EEF-85E7-878F4ED632EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaEngine", "LuaEngine\LuaEngine.csproj", "{229F8CE3-01D9-4EEF-85E7-878F4ED632EF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapStation.Common", "libs\MapStation\MapStation.Common\MapStation.Common.csproj", "{F139E42D-FDA3-40CC-BE05-9A097897255B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{229F8CE3-01D9-4EEF-85E7-878F4ED632EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{229F8CE3-01D9-4EEF-85E7-878F4ED632EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{229F8CE3-01D9-4EEF-85E7-878F4ED632EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

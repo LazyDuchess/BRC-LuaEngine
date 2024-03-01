@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <AssemblyName>LuaEngine</AssemblyName>
     <Description>My first plugin</Description>
     <Version>1.0.0</Version>
@@ -18,12 +18,18 @@
     <PackageReference Include="BepInEx.Core" Version="5.*" />
     <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*" />
     <PackageReference Include="MoonSharp" Version="2.0.0" />
-    <PackageReference Include="UnityEngine.Modules" Version="2021.3.20" IncludeAssets="compile" />
+    <PackageReference Include="UnityEngine.Modules" Version="2021.3.27" IncludeAssets="compile" />
 	<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\libs\MapStation\MapStation.Common\MapStation.Common.csproj">
+      <Private>False</Private>
+    </ProjectReference>
   </ItemGroup>
   
   <ItemGroup>

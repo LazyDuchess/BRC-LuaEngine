@@ -29,10 +29,9 @@ namespace LuaEngine
             AutoRunScripts = AutoRunScripts.OrderBy(script => script.Priority).ToList();
         }
 
-        public static void LoadPluginZip(string zipPath)
+        public static void LoadPluginZip(ZipArchive archive)
         {
-            var zip = ZipFile.OpenRead(zipPath);
-            foreach(var entry in zip.Entries)
+            foreach (var entry in archive.Entries)
             {
                 var fullName = entry.FullName.Replace(@"\", "/");
                 var name = entry.Name.Replace(@"\", "/");
@@ -53,6 +52,13 @@ namespace LuaEngine
                     }
                 }
             }
+        }
+
+        public static void LoadPluginZip(string zipPath)
+        {
+            var zip = ZipFile.OpenRead(zipPath);
+            LoadPluginZip(zip);
+            zip.Dispose();
         }
 
         private static string ReadStringZipEntry(ZipArchiveEntry entry)
