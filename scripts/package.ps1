@@ -59,7 +59,7 @@ function CreatePluginZip(){
     $readmePath = "README.md"
     $zip = CreateZip $zipPath
 
-    Push-Location "LuaEngine/bin/$Configuration/net46"
+    Push-Location "LuaEngine/bin/$Configuration/net471"
     Get-ChildItem -Recurse './' -Exclude '*.pdb' | ForEach-Object {
         $path = ($_ | Resolve-Path -Relative).Replace('.\', '')
         AddToZip $zip $_.FullName $path
