@@ -82,6 +82,12 @@ $package = Get-Content $packagePath -raw | ConvertFrom-Json
 $package.version = $newVersion
 $package | ConvertTo-Json -depth 32| set-content $packagePath
 
+$manifestPath = "Thunderstore/manifest.json"
+
+$manifest = Get-Content $manifestPath -raw | ConvertFrom-Json
+$manifest.version_number = $newVersion
+$manifest | ConvertTo-Json -depth 32| set-content $manifestPath
+
 Write-Host "Bumped all versions!"
 
 if($noit){
@@ -93,6 +99,8 @@ Write-Host "Making Git Tag"
 git add $packagePath
 git add $editorVersionCSPath
 git add $csprojPath
+git add $manifestPath
+
 git commit -m "v$newVersion"
 git tag $newVersion
 
