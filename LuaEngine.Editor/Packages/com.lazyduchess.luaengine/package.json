@@ -1,16 +1,16 @@
 {
   "name": "com.lazyduchess.luaengine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "displayName": "BRC LuaEngine",
-  "description": "LuaEngine addon for Bomb Rush Cyberfunk",
+  "description": "LuaEngine addon for Bomb Rush Cyberfunk, for use with MapStation.",
   "unity": "2021.3",
   "unityRelease": "27f1",
   "documentationUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/wiki",
   "changelogUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/blob/master/CHANGELOG.md",
   "licensesUrl": "https://github.com/LazyDuchess/BRC-LuaEngine/blob/master/LICENSE.md",
   "dependencies": {
-    "com.brcmapstation.tools": "0.12.2",
-	"com.brcmapstation.common": "0.12.2"
+    "com.brcmapstation.tools": "0.13.0",
+    "com.brcmapstation.common": "0.13.0"
   },
   "author": {
     "name": "Lazy Duchess",
