@@ -18,7 +18,8 @@ namespace LuaEngine.Editor
         public override void ProcessThunderstoreZip(ZipArchive archive, string mapName)
         {
             var luaAssetPath = Path.Combine(AssetNames.GetAssetDirectoryForMap(mapName),"lua.luamod");
-            archive.CreateEntryFromFile(luaAssetPath, "lua.luamod");
+            if (File.Exists(luaAssetPath))
+                archive.CreateEntryFromFile(luaAssetPath, "lua.luamod");
         }
     }
 }
