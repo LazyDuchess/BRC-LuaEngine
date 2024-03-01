@@ -1,6 +1,8 @@
 $ErrorActionPreference = 'Stop'
 $PSNativeCommandUseErrorActionPreference = $true
 
+git submodule update --init --recursive
+
 Set-Location $PSScriptRoot/..
 [Environment]::CurrentDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
 
