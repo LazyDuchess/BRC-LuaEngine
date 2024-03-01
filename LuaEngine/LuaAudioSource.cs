@@ -20,6 +20,11 @@ namespace LuaEngine
             _handle = audio;
         }
 
+        internal static LuaAudioSource CastMethod(AudioSource audioSource)
+        {
+            return new LuaAudioSource(audioSource, LuaManager.Instance.GlobalScript);
+        }
+
         public void Play()
         {
             _handle.Play();
