@@ -18,7 +18,8 @@ namespace LuaEngine
         {
             RegisterCasts(
                 LuaCast.Create<LuaPlayer, Player>(LuaPlayer.CastMethod),
-                LuaCast.Create<LuaScriptBehavior, ScriptBehavior>(LuaScriptBehavior.CastMethod)
+                LuaCast.Create<LuaScriptBehavior, ScriptBehavior>(LuaScriptBehavior.CastMethod),
+                LuaCast.Create<LuaAnimator, Animator>(LuaAnimator.CastMethod)
                 );
         }
 
