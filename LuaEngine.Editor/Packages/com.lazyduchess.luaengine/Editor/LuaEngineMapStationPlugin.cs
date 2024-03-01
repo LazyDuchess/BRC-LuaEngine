@@ -15,11 +15,30 @@ namespace LuaEngine.Editor
             return new string[] { "LazyDuchess-LuaEngine-0.1.0" };
         }
 
-        public override void ProcessThunderstoreZip(ZipArchive archive, string mapName)
+        private string MakeLuaZip(string assetPath, string luaPath)
         {
-            var luaAssetPath = Path.Combine(AssetNames.GetAssetDirectoryForMap(mapName),"lua.luamod");
-            if (File.Exists(luaAssetPath))
-                archive.CreateEntryFromFile(luaAssetPath, "lua.luamod");
+            var luaOutputPath = Path.Combine(assetPath, "lua.luamod");
+            ZipFile.CreateFromDirectory(luaPath, luaOutputPath);
+            return luaOutputPath;
+        }
+
+        public override void ProcessMapZip(ZipArchive archive, string mapName, System.IO.Compression.CompressionLevel compressionLevel)
+        {
+            var assetPath = AssetNames.GetAssetDirectoryForMap(mapName);
+            var luaZipPath = Path.Combine(assetPath, "lua.luamod");
+            if (File.Exists(luaZipPath))
+            {
+                archive.CreateEntryFromFile(luaZipPath, "lua.luamod", compressionLevel);
+                return;
+            }
+
+            var luaPath = Path.Combine(assetPath, "lua");
+            if (Directory.Exists(luaPath)) {
+                luaZipPath = MakeLuaZip(assetPath, luaPath);
+                archive.CreateEntryFromFile(luaZipPath, "lua.luamod", compressionLevel);
+                File.Delete(luaZipPath);
+                return;
+            }
         }
     }
 }
