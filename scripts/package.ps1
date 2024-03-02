@@ -9,6 +9,10 @@ $PSNativeCommandUseErrorActionPreference = $true
 Set-Location $PSScriptRoot/..
 [Environment]::CurrentDirectory = (Get-Location -PSProvider FileSystem).ProviderPath
 
+$csprojPath = "LuaEngine/LuaEngine.csproj"
+$projxml = [xml](Get-Content -Path $csprojPath)
+$version = $projxml.Project.PropertyGroup[0].Version
+
 if($Release) {
     $Configuration='Release'
 } else {
@@ -55,7 +59,7 @@ function CreateLuaZip(){
 }
 
 function CreatePluginZip(){
-    $zipPath = "Build/LuaEngine.$Configuration.zip"
+    $zipPath = "Build/LuaEngine.$Configuration-$version.zip"
     $readmePath = "README.md"
     $zip = CreateZip $zipPath
 
@@ -90,7 +94,7 @@ function CreatePluginZip(){
 }
 
 function CreatePackageZip(){
-	$zipPath = "Build/com.lazyduchess.luaengine.zip"
+	$zipPath = "Build/com.lazyduchess.luaengine-$version.zip"
 	$zip = CreateZip $zipPath
 	
 	Push-Location "LuaEngine.Editor/Packages/com.lazyduchess.luaengine"
