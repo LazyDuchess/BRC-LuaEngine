@@ -14,6 +14,9 @@ namespace LuaEngine
     public class LuaScriptBehavior : LuaBuiltInBehaviour
     {
         public string ScriptName => _handle.LuaScriptName;
+
+        public LuaEventHandler OnStart => _handle.OnStart;
+
         public LuaEventHandler OnDestroy => _handle.OnDestroyed;
 
         public LuaEventHandler OnTriggerEnter => _handle.OnAnyTriggerEnter;

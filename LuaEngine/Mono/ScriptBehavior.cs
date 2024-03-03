@@ -9,6 +9,7 @@ namespace LuaEngine.Mono
 {
     public class ScriptBehavior : MonoBehaviour
     {
+        public LuaEventHandler OnStart = null;
         public LuaEventHandler OnDestroyed = null;
 
         public LuaEventHandler OnAnyTriggerEnter = null;
@@ -54,6 +55,7 @@ namespace LuaEngine.Mono
 
             var globalScript = LuaManager.Instance.GlobalScript;
             var luaScript = LuaDatabase.BehaviorScripts[LuaScriptName];
+            OnStart = new(globalScript);
             OnDestroyed = new(globalScript);
             OnAnyTriggerEnter = new(globalScript);
             OnAnyTriggerStay = new(globalScript);
@@ -71,6 +73,11 @@ namespace LuaEngine.Mono
         private void OnDestroy()
         {
             OnDestroyed?.Invoke();
+        }
+        
+        private void Start()
+        {
+            OnStart?.Invoke();
         }
     }
 }
