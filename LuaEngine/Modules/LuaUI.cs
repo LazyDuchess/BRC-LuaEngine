@@ -82,6 +82,11 @@ namespace LuaEngine.Modules
             {
                 Core.Instance.BaseModule.uiManager.ShowNotification(text);
             }
+
+            public void ResetCamera()
+            {
+                GameplayCamera.instance.ResetCameraPositionRotation();
+            }
         }
     }
 }
