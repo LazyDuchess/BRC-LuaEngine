@@ -13,6 +13,17 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
+        public bool UserInputEnabled
+        {
+            get
+            {
+                return Player.userInputEnabled;
+            }
+            set
+            {
+                Player.userInputEnabled = value;
+            }
+        }
         public LuaEventHandler OnLandCombo => PlayerLuaEngineComponent.Get(Player)?.OnLandCombo;
         public LuaEventHandler OnDropCombo => PlayerLuaEngineComponent.Get(Player)?.OnDropCombo;
         public bool IsComboing
