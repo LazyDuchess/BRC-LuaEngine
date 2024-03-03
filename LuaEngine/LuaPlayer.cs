@@ -195,5 +195,10 @@ namespace LuaEngine
             Player.currentTrickOnFoot = !Player.usingEquippedMovestyle;
             Player.baseScore += (float)((int)((float)Player.currentTrickPoints * Player.scoreFactor));
         }
+
+        public void PlayVoice(int audioClipID, int voicePriority, bool fromPlayer = true)
+        {
+            Player.PlayVoice((AudioClipID)audioClipID, (VoicePriority)voicePriority, fromPlayer);
+        }
     }
 }
