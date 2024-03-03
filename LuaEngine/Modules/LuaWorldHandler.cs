@@ -53,7 +53,7 @@ namespace LuaEngine.Modules
             {
                 var pos = LuaMathUtils.TableToVector3(luaPosition);
                 var rot = Quaternion.Euler(LuaMathUtils.TableToVector3(luaEulerAngles));
-                WorldHandler.instance.PlacePlayerAt(player.Handle, pos, rot, stopAbility);
+                WorldHandler.instance.PlacePlayerAt(player.Player, pos, rot, stopAbility);
             }
         }
     }

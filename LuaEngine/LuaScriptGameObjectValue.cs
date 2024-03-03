@@ -15,18 +15,18 @@ namespace LuaEngine
         {
             get
             {
-                return new LuaGameObject(Handle.Value);
+                return new LuaGameObject(ScriptGameObjectValue.Value);
             }
             set
             {
-                Handle.Value = value.Handle;
+                ScriptGameObjectValue.Value = value.Handle;
             }
         }
-        public new ScriptGameObjectValue Handle = null;
+        public ScriptGameObjectValue ScriptGameObjectValue = null;
         [MoonSharpHidden]
         public LuaScriptGameObjectValue(ScriptGameObjectValue value, Script script) : base(value, script)
         {
-            Handle = value;
+            ScriptGameObjectValue = value;
         }
     }
 }

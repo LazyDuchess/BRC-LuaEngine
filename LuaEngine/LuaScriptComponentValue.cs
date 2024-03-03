@@ -15,18 +15,18 @@ namespace LuaEngine
         {
             get
             {
-                return LuaCastFactory.CastCSharpTypeToLuaType<LuaBuiltInComponent>(Handle.Value);
+                return LuaCastFactory.CastCSharpTypeToLuaType<LuaBuiltInComponent>(ScriptComponentValue.Value);
             }
             set
             {
-                Handle.Value = value.Handle;
+                ScriptComponentValue.Value = value.Component;
             }
         }
-        public new ScriptComponentValue Handle = null;
+        public ScriptComponentValue ScriptComponentValue = null;
         [MoonSharpHidden]
         public LuaScriptComponentValue(ScriptComponentValue value, Script script) : base(value, script)
         {
-            Handle = value;
+            ScriptComponentValue = value;
         }
     }
 }

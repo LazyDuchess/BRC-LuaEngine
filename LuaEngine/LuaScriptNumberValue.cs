@@ -15,18 +15,18 @@ namespace LuaEngine
         {
             get
             {
-                return Handle.Value;
+                return ScriptNumberValue.Value;
             }
             set
             {
-                Handle.Value = value;
+                ScriptNumberValue.Value = value;
             }
         }
-        public new ScriptNumberValue Handle = null;
+        public ScriptNumberValue ScriptNumberValue = null;
         [MoonSharpHidden]
         public LuaScriptNumberValue(ScriptNumberValue value, Script script) : base(value, script)
         {
-            Handle = value;
+            ScriptNumberValue = value;
         }
 
         internal static LuaScriptNumberValue CastMethod(ScriptNumberValue numberValue)

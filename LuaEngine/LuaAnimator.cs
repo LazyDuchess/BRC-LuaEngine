@@ -12,12 +12,12 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaAnimator : LuaBuiltInBehaviour
     {
-        public new Animator Handle = null;
+        public Animator Animator = null;
 
         [MoonSharpHidden]
         public LuaAnimator(Animator animator, Script script) : base(animator, script)
         {
-            Handle = animator;
+            Animator = animator;
         }
 
         internal static LuaAnimator CastMethod(Animator animator)
@@ -27,37 +27,37 @@ namespace LuaEngine
 
         public void SetTrigger(string name)
         {
-            Handle.SetTrigger(name);
+            Animator.SetTrigger(name);
         }
 
         public void SetBool(string name, bool value)
         {
-            Handle.SetBool(name, value);
+            Animator.SetBool(name, value);
         }
 
         public bool GetBool(string name)
         {
-            return Handle.GetBool(name);
+            return Animator.GetBool(name);
         }
 
         public void SetInteger(string name, int value)
         {
-            Handle.SetInteger(name, value);
+            Animator.SetInteger(name, value);
         }
 
         public int GetInteger(string name)
         {
-            return Handle.GetInteger(name);
+            return Animator.GetInteger(name);
         }
 
         public void SetFloat(string name, float value)
         {
-            Handle.SetFloat(name, value);
+            Animator.SetFloat(name, value);
         }
 
         public float GetFloat(string name)
         {
-            return Handle.GetFloat(name);
+            return Animator.GetFloat(name);
         }
     }
 }

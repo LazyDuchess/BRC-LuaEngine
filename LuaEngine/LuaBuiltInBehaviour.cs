@@ -12,23 +12,23 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaBuiltInBehaviour : LuaBuiltInComponent
     {
-        public bool IsActiveAndEnabled => Handle.isActiveAndEnabled;
+        public bool IsActiveAndEnabled => Behaviour.isActiveAndEnabled;
         public bool Enabled
         {
             get
             {
-                return Handle.enabled;
+                return Behaviour.enabled;
             }
             set
             {
-                Handle.enabled = true;
+                Behaviour.enabled = true;
             }
         }
-        public new Behaviour Handle = null;
+        public Behaviour Behaviour = null;
         [MoonSharpHidden]
         public LuaBuiltInBehaviour(Behaviour behaviour, Script script) : base(behaviour, script)
         {
-            Handle = behaviour;
+            Behaviour = behaviour;
         }
     }
 }

@@ -223,7 +223,7 @@ namespace LuaEngine
 
         public void SetStringValue(string name, string value)
         {
-            var stringValue = GetStringValue(name).Handle;
+            var stringValue = GetStringValue(name).ScriptStringValue;
             if (stringValue == null)
                 stringValue = Handle.AddComponent<ScriptStringValue>();
             stringValue.Value = value;
@@ -231,7 +231,7 @@ namespace LuaEngine
 
         public void SetNumberValue(string name, double value)
         {
-            var numberValue = GetNumberValue(name).Handle;
+            var numberValue = GetNumberValue(name).ScriptNumberValue;
             if (numberValue == null)
                 numberValue = Handle.AddComponent<ScriptNumberValue>();
             numberValue.Value = value;
