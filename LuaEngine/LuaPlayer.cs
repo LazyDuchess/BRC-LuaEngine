@@ -13,6 +13,35 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
+        public bool IsComboing
+        {
+            get
+            {
+                return Player.IsComboing();
+            }
+        }
+        public float ScoreMultiplier
+        {
+            get
+            {
+                return Player.scoreMultiplier;
+            }
+            set
+            {
+                Player.scoreMultiplier = value;
+            }
+        }
+        public float BaseScore
+        {
+            get
+            {
+                return Player.baseScore;
+            }
+            set
+            {
+                Player.baseScore = value;
+            }
+        }
         public bool Grounded => Player.IsGrounded();
         public int MoveStyleEquipped => (int)Player.moveStyleEquipped;
         public int MoveStyle => (int)Player.moveStyle;
