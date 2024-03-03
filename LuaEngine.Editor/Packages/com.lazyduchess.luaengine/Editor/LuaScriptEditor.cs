@@ -2,7 +2,6 @@
 using UnityEditor;
 using System.IO;
 using UnityEditor.VersionControl;
-using static UnityEditor.FilePathAttribute;
 
 namespace LuaEngine.Editor
 {
@@ -39,7 +38,6 @@ end";
         [MenuItem("Assets/Create/Lua/Lua Folder", false, -100)]
         public static void CreateLuaFolder()
         {
-            var path = GetCurrentFolder();
             var luaFolderPath = Path.Combine(GetCurrentFolder(), "lua");
             var autorunFolderPath = Path.Combine(luaFolderPath, "autorun");
             var behaviorFolderPath = Path.Combine(luaFolderPath, "behavior");
