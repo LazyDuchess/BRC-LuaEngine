@@ -12,7 +12,7 @@ namespace LuaEngine
     public class LuaBuiltInComponent
     {
         public LuaGameObject GameObject = null;
-        internal Component Handle = null;
+        public Component Handle = null;
         [MoonSharpHidden]
         public LuaBuiltInComponent(Component component, Script script)
         {

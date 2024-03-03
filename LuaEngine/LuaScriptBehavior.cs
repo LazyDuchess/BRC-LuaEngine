@@ -13,26 +13,26 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaScriptBehavior : LuaBuiltInBehaviour
     {
-        public string ScriptName => _handle.LuaScriptName;
+        public string ScriptName => Handle.LuaScriptName;
 
-        public LuaEventHandler OnStart => _handle.OnStart;
+        public LuaEventHandler OnStart => Handle.OnStart;
 
-        public LuaEventHandler OnDestroy => _handle.OnDestroyed;
+        public LuaEventHandler OnDestroy => Handle.OnDestroyed;
 
-        public LuaEventHandler OnTriggerEnter => _handle.OnAnyTriggerEnter;
-        public LuaEventHandler OnTriggerStay => _handle.OnAnyTriggerStay;
-        public LuaEventHandler OnTriggerExit => _handle.OnAnyTriggerExit;
+        public LuaEventHandler OnTriggerEnter => Handle.OnAnyTriggerEnter;
+        public LuaEventHandler OnTriggerStay => Handle.OnAnyTriggerStay;
+        public LuaEventHandler OnTriggerExit => Handle.OnAnyTriggerExit;
 
-        public LuaEventHandler OnPlayerTriggerEnter => _handle.OnPlayerTriggerEnter;
-        public LuaEventHandler OnPlayerTriggerStay => _handle.OnPlayerTriggerStay;
-        public LuaEventHandler OnPlayerTriggerExit => _handle.OnPlayerTriggerExit;
+        public LuaEventHandler OnPlayerTriggerEnter => Handle.OnPlayerTriggerEnter;
+        public LuaEventHandler OnPlayerTriggerStay => Handle.OnPlayerTriggerStay;
+        public LuaEventHandler OnPlayerTriggerExit => Handle.OnPlayerTriggerExit;
 
-        private ScriptBehavior _handle = null;
+        public new ScriptBehavior Handle = null;
 
         [MoonSharpHidden]
         public LuaScriptBehavior(ScriptBehavior scriptBehavior, Script script) : base(scriptBehavior, script)
         {
-            _handle = scriptBehavior;
+            Handle = scriptBehavior;
         }
 
         internal static LuaScriptBehavior CastMethod(ScriptBehavior scriptBehavior)

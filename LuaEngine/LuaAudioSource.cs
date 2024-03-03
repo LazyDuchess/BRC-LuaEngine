@@ -12,12 +12,12 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaAudioSource : LuaBuiltInBehaviour
     {
-        private AudioSource _handle = null;
+        public new AudioSource Handle = null;
 
         [MoonSharpHidden]
         public LuaAudioSource(AudioSource audio, Script script) : base(audio, script)
         {
-            _handle = audio;
+            Handle = audio;
         }
 
         internal static LuaAudioSource CastMethod(AudioSource audioSource)
@@ -27,22 +27,22 @@ namespace LuaEngine
 
         public void Play()
         {
-            _handle.Play();
+            Handle.Play();
         }
 
         public void Stop()
         {
-            _handle.Stop();
+            Handle.Stop();
         }
 
         public void Pause()
         {
-            _handle.Pause();
+            Handle.Pause();
         }
 
         public void SetMixerGroup(int mixerGroup)
         {
-            _handle.outputAudioMixerGroup = Core.Instance.AudioManager.mixerGroups[mixerGroup];
+            Handle.outputAudioMixerGroup = Core.Instance.AudioManager.mixerGroups[mixerGroup];
         }
     }
 }

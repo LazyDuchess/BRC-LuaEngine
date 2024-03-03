@@ -22,7 +22,7 @@ namespace LuaEngine
                 Handle.Value = value;
             }
         }
-        internal ScriptNumberValue Handle = null;
+        public new ScriptNumberValue Handle = null;
         [MoonSharpHidden]
         public LuaScriptNumberValue(ScriptNumberValue value, Script script) : base(value, script)
         {

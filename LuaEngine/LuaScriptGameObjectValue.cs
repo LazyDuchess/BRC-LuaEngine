@@ -22,7 +22,7 @@ namespace LuaEngine
                 Handle.Value = value.Handle;
             }
         }
-        internal ScriptGameObjectValue Handle = null;
+        public new ScriptGameObjectValue Handle = null;
         [MoonSharpHidden]
         public LuaScriptGameObjectValue(ScriptGameObjectValue value, Script script) : base(value, script)
         {

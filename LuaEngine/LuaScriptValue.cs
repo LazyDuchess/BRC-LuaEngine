@@ -16,18 +16,18 @@ namespace LuaEngine
         {
             get
             {
-                return _handle.Name;
+                return Handle.Name;
             }
             set
             {
-                _handle.Name = value;
+                Handle.Name = value;
             }
         }
-        private ScriptValue _handle = null;
+        public new ScriptValue Handle = null;
         [MoonSharpHidden]
         public LuaScriptValue(ScriptValue value, Script script) : base(value, script)
         {
-            _handle = value;
+            Handle = value;
         }
     }
 }

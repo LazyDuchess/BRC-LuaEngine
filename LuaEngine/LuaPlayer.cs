@@ -13,64 +13,64 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
-        public int MoveStyleEquipped => (int)_handle.moveStyleEquipped;
-        public int MoveStyle => (int)_handle.moveStyle;
-        public float NormalizedHP => _handle.GetNormalizedHP();
+        public int MoveStyleEquipped => (int)Handle.moveStyleEquipped;
+        public int MoveStyle => (int)Handle.moveStyle;
+        public float NormalizedHP => Handle.GetNormalizedHP();
         public float MaxHP
         {
             get
             {
-                return _handle.maxHP;
+                return Handle.maxHP;
             }
             set
             {
-                _handle.maxHP = value;
+                Handle.maxHP = value;
             }
         }
         public float HP
         {
             get
             {
-                return _handle.HP;
+                return Handle.HP;
             }
             set
             {
-                _handle.HP = value;
+                Handle.HP = value;
             }
         }
         public string AbilityName
         {
             get
             {
-                if (_handle.ability == null)
+                if (Handle.ability == null)
                     return null;
-                return _handle.ability.GetType().Name;
+                return Handle.ability.GetType().Name;
             }
         }
-        public bool IsTooBusyForSuddenCutscenes => _handle.IsTooBusyForSuddenCutscenes();
-        public bool IsBusyWithSequence => _handle.IsBusyWithSequence();
-        public bool IsDead => _handle.IsDead();
+        public bool IsTooBusyForSuddenCutscenes => Handle.IsTooBusyForSuddenCutscenes();
+        public bool IsBusyWithSequence => Handle.IsBusyWithSequence();
+        public bool IsDead => Handle.IsDead();
         public bool IsAI
         {
-            get { return _handle.isAI; }
-            set { _handle.isAI = value; }
+            get { return Handle.isAI; }
+            set { Handle.isAI = value; }
         }
         public float BoostCharge
         {
-            get { return _handle.boostCharge; }
-            set { _handle.boostCharge = value; }
+            get { return Handle.boostCharge; }
+            set { Handle.boostCharge = value; }
         }
         public float MaxBoostCharge
         {
-            get { return _handle.maxBoostCharge; }
-            set { _handle.maxBoostCharge = value; }
+            get { return Handle.maxBoostCharge; }
+            set { Handle.maxBoostCharge = value; }
         }
-        private Player _handle = null;
+        public new Player Handle = null;
 
         [MoonSharpHidden]
         public LuaPlayer(Player player, Script script) : base(player, script)
         {
-            _handle = player;
+            Handle = player;
         }
 
         internal static LuaPlayer CastMethod(Player player)
@@ -80,17 +80,17 @@ namespace LuaEngine
 
         public void AddBoostCharge(float amount)
         {
-            _handle.AddBoostCharge(amount);
+            Handle.AddBoostCharge(amount);
         }
 
         public void SetRotation(Table forward)
         {
-            _handle.SetRotation(LuaMathUtils.TableToVector3(forward));
+            Handle.SetRotation(LuaMathUtils.TableToVector3(forward));
         }
 
         public void SetRotationHard(Table forward)
         {
-            _handle.SetRotHard(LuaMathUtils.TableToVector3(forward));
+            Handle.SetRotHard(LuaMathUtils.TableToVector3(forward));
         }
 
         public void GetHit(int damage, Table damageDirection, string knockbackType)
@@ -117,22 +117,22 @@ namespace LuaEngine
                     parsedKnockbackType = KnockbackAbility.KnockbackType.NO_KNOCKBACK;
                     break;
             }
-            _handle.GetHit(damage, LuaMathUtils.TableToVector3(damageDirection), parsedKnockbackType);
+            Handle.GetHit(damage, LuaMathUtils.TableToVector3(damageDirection), parsedKnockbackType);
         }
 
         public void ChangeHP(int damage)
         {
-            _handle.ChangeHP(damage);
+            Handle.ChangeHP(damage);
         }
 
         public void SetCurrentMoveStyleEquipped(int moveStyle)
         {
-            _handle.SetCurrentMoveStyleEquipped((MoveStyle)moveStyle);
+            Handle.SetCurrentMoveStyleEquipped((MoveStyle)moveStyle);
         }
 
         public void SwitchToEquippedMovestyle(bool set, bool doAirTrick, bool showEffect)
         {
-            _handle.SwitchToEquippedMovestyle(set, doAirTrick, true, showEffect);
+            Handle.SwitchToEquippedMovestyle(set, doAirTrick, true, showEffect);
         }
     }
 }

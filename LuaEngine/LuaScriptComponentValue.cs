@@ -22,7 +22,7 @@ namespace LuaEngine
                 Handle.Value = value.Handle;
             }
         }
-        internal ScriptComponentValue Handle = null;
+        public new ScriptComponentValue Handle = null;
         [MoonSharpHidden]
         public LuaScriptComponentValue(ScriptComponentValue value, Script script) : base(value, script)
         {
