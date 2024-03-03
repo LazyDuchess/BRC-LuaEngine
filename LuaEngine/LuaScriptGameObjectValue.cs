@@ -28,5 +28,10 @@ namespace LuaEngine
         {
             ScriptGameObjectValue = value;
         }
+
+        internal static LuaScriptGameObjectValue CastMethod(ScriptGameObjectValue gameObjectValue)
+        {
+            return new LuaScriptGameObjectValue(gameObjectValue, LuaManager.Instance.GlobalScript);
+        }
     }
 }

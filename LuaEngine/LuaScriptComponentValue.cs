@@ -28,5 +28,10 @@ namespace LuaEngine
         {
             ScriptComponentValue = value;
         }
+
+        internal static LuaScriptComponentValue CastMethod(ScriptComponentValue componentValue)
+        {
+            return new LuaScriptComponentValue(componentValue, LuaManager.Instance.GlobalScript);
+        }
     }
 }
