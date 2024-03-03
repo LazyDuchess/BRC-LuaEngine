@@ -201,24 +201,26 @@ namespace LuaEngine
 
         public LuaScriptStringValue GetStringValue(string name)
         {
-            var allStringValues = Handle.GetComponents<ScriptStringValue>();
-            foreach(var stringValue in allStringValues)
-            {
-                if (stringValue.Name == name)
-                    return new LuaScriptStringValue(stringValue, LuaManager.Instance.GlobalScript);
-            }
-            return null;
+            var stringValue = Handle.GetComponents<ScriptStringValue>().Where(comp => comp.Name == name).FirstOrDefault();
+            return new LuaScriptStringValue(stringValue, LuaManager.Instance.GlobalScript);
         }
 
         public LuaScriptNumberValue GetNumberValue(string name)
         {
-            var allNumberValues = Handle.GetComponents<ScriptNumberValue>();
-            foreach (var numberValue in allNumberValues)
-            {
-                if (numberValue.Name == name)
-                    return new LuaScriptNumberValue(numberValue, LuaManager.Instance.GlobalScript);
-            }
-            return null;
+            var numberValue = Handle.GetComponents<ScriptNumberValue>().Where(comp => comp.Name == name).FirstOrDefault();
+            return new LuaScriptNumberValue(numberValue, LuaManager.Instance.GlobalScript);
+        }
+
+        public LuaScriptGameObjectValue GetGameObjectValue(string name)
+        {
+            var goValue = Handle.GetComponents<ScriptGameObjectValue>().Where(comp => comp.Name == name).FirstOrDefault();
+            return new LuaScriptGameObjectValue(goValue, LuaManager.Instance.GlobalScript);
+        }
+
+        public LuaScriptComponentValue GetComponentValue(string name)
+        {
+            var compValue = Handle.GetComponents<ScriptComponentValue>().Where(comp => comp.Name == name).FirstOrDefault();
+            return new LuaScriptComponentValue(compValue, LuaManager.Instance.GlobalScript);
         }
 
         public void SetStringValue(string name, string value)
@@ -235,6 +237,22 @@ namespace LuaEngine
             if (numberValue == null)
                 numberValue = Handle.AddComponent<ScriptNumberValue>();
             numberValue.Value = value;
+        }
+
+        public void SetGameObjectValue(string name, LuaGameObject value)
+        {
+            var goValue = GetGameObjectValue(name).ScriptGameObjectValue;
+            if (goValue == null)
+                goValue = Handle.AddComponent<ScriptGameObjectValue>();
+            goValue.Value = value.Handle;
+        }
+
+        public void SetComponentValue(string name, LuaBuiltInComponent value)
+        {
+            var compValue = GetComponentValue(name).ScriptComponentValue;
+            if (compValue == null)
+                compValue = Handle.AddComponent<ScriptComponentValue>();
+            compValue.Value = value.Component;
         }
     }
 }
