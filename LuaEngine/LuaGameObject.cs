@@ -140,6 +140,16 @@ namespace LuaEngine
         {
             return LuaMathUtils.Vector3ToTable(Handle.transform.forward);
         }
+        
+        public Table GetRight()
+        {
+            return LuaMathUtils.Vector3ToTable(Handle.transform.right);
+        }
+
+        public Table GetUp()
+        {
+            return LuaMathUtils.Vector3ToTable(Handle.transform.up);
+        }
 
         public LuaGameObject Instantiate()
         {
