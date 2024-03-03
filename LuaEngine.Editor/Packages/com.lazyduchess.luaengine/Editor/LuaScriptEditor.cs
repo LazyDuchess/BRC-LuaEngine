@@ -8,8 +8,7 @@ namespace LuaEngine.Editor
     public static class LuaScriptEditor
     {
         private const string EmptyScriptContents = "";
-        private const string BehaviorScriptContents = @"
--- Any code outside of functions is executed immediately.
+        private const string BehaviorScriptContents = @"-- Any code outside of functions is executed immediately.
 local updateCallback
 
 -- Called before the first frame update.
@@ -27,16 +26,13 @@ end
 
 script.OnStart.Add(Start)
 updateCallback = Core.OnUpdate.Add(Update)
-script.OnDestroy.Add(OnDestroy)
-";
-        private const string AutorunScriptContents = @"
---PRIORITY: 0
+script.OnDestroy.Add(OnDestroy)";
+        private const string AutorunScriptContents = @"--PRIORITY: 0
 
 MyMathLibrary = {}
 function MyMathLibrary.Add(x, y)
     return x + y
-end
-";
+end";
 
         [MenuItem("Assets/Create/Lua/Empty Script", false)]
         public static void CreateEmptyLuaScript()
