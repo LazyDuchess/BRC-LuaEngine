@@ -1,5 +1,5 @@
 {
-    "name": "LuaEngine.Runtime",
+    "name": "LuaEngine",
     "rootNamespace": "LuaEngine",
     "references": [],
     "includePlatforms": [],
