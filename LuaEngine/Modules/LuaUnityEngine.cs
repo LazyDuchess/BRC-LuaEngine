@@ -1,5 +1,7 @@
-﻿using MoonSharp.Interpreter;
+﻿using LuaEngine.Mono;
+using MoonSharp.Interpreter;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace LuaEngine.Modules
@@ -23,6 +25,13 @@ namespace LuaEngine.Modules
             {
                 _script = script;
             }
+
+            public List<ScriptBehavior> FindScriptBehaviors(string scriptName, bool includeInactive)
+            {
+                var scripts = GameObject.FindObjectsOfType<ScriptBehavior>(includeInactive).Where(script => script.LuaScriptName == scriptName);
+                return scripts.ToList();
+            }
+
             public List<LuaGameObject> GetGameObjects(bool includeInactive)
             {
                 var objectArray = GameObject.FindObjectsOfType<GameObject>(includeInactive);
