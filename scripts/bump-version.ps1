@@ -15,6 +15,7 @@ Set-Location $PSScriptRoot/..
 
 if($Null -ne $(git status --untracked-files=no --porcelain=v1)) {
         Write-Error "Git status shows modified files. This script cannot commit a new version while there are uncommitted, modified files."
+        return
 }
 
 if ($version){
