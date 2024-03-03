@@ -19,6 +19,14 @@ namespace LuaEngine
 
         public LuaEventHandler OnDestroy => ScriptBehavior.OnDestroyed;
 
+        public LuaEventHandler OnCollisionEnter => ScriptBehavior.OnAnyCollisionEnter;
+        public LuaEventHandler OnCollisionStay => ScriptBehavior.OnAnyCollisionStay;
+        public LuaEventHandler OnCollisionExit => ScriptBehavior.OnAnyCollisionExit;
+
+        public LuaEventHandler OnPlayerCollisionEnter => ScriptBehavior.OnPlayerCollisionEnter;
+        public LuaEventHandler OnPlayerCollisionStay => ScriptBehavior.OnPlayerCollisionStay;
+        public LuaEventHandler OnPlayerCollisionExit => ScriptBehavior.OnPlayerCollisionExit;
+
         public LuaEventHandler OnTriggerEnter => ScriptBehavior.OnAnyTriggerEnter;
         public LuaEventHandler OnTriggerStay => ScriptBehavior.OnAnyTriggerStay;
         public LuaEventHandler OnTriggerExit => ScriptBehavior.OnAnyTriggerExit;

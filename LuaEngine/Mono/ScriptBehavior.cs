@@ -12,6 +12,14 @@ namespace LuaEngine.Mono
         public LuaEventHandler OnStart = null;
         public LuaEventHandler OnDestroyed = null;
 
+        public LuaEventHandler OnAnyCollisionEnter = null;
+        public LuaEventHandler OnAnyCollisionStay = null;
+        public LuaEventHandler OnAnyCollisionExit = null;
+
+        public LuaEventHandler OnPlayerCollisionEnter = null;
+        public LuaEventHandler OnPlayerCollisionStay = null;
+        public LuaEventHandler OnPlayerCollisionExit = null;
+
         public LuaEventHandler OnAnyTriggerEnter = null;
         public LuaEventHandler OnAnyTriggerStay = null;
         public LuaEventHandler OnAnyTriggerExit = null;
@@ -22,6 +30,21 @@ namespace LuaEngine.Mono
 
         public string LuaScriptName = null;
         private bool _initialized = false;
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            OnAnyCollisionEnter?.Invoke(new LuaGameObject(collision.gameObject));
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            OnAnyCollisionStay?.Invoke(new LuaGameObject(collision.gameObject));
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            OnAnyCollisionExit?.Invoke(new LuaGameObject(collision.gameObject));
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -57,12 +80,23 @@ namespace LuaEngine.Mono
             var luaScript = LuaDatabase.BehaviorScripts[LuaScriptName];
             OnStart = new(globalScript);
             OnDestroyed = new(globalScript);
+
+            OnAnyCollisionEnter = new(globalScript);
+            OnAnyCollisionStay = new(globalScript);
+            OnAnyCollisionExit = new(globalScript);
+
+            OnPlayerCollisionEnter = new(globalScript);
+            OnPlayerCollisionStay = new(globalScript);
+            OnPlayerCollisionExit = new(globalScript);
+
             OnAnyTriggerEnter = new(globalScript);
             OnAnyTriggerStay = new(globalScript);
             OnAnyTriggerExit = new(globalScript);
+
             OnPlayerTriggerEnter = new(globalScript);
             OnPlayerTriggerStay = new(globalScript);
             OnPlayerTriggerExit = new(globalScript);
+
             luaScript.RunForScriptBehavior(globalScript, new LuaScriptBehavior(this, globalScript));
         }
         public void Restart()
