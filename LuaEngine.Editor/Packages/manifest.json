@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.brcmapstation.tools": "0.13.2",
     "com.unity.collab-proxy": "2.0.1",
     "com.unity.editorcoroutines": "1.0.0",
     "com.unity.ide.rider": "3.0.18",
