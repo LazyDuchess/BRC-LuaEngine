@@ -32,9 +32,10 @@ namespace LuaEngine
             GlobalScript = new();
             GlobalScript.Options.DebugPrint = message => { _scriptLogSource.LogInfo(message); };
             RegisterModules();
+            RunScripts();
         }
 
-        private void Start()
+        private void RunScripts()
         {
             LuaDatabase.AutoRunScripts = LuaDatabase.AutoRunScripts.OrderBy(script => script.Priority).ToList();
             foreach (var script in LuaDatabase.AutoRunScripts)
@@ -42,6 +43,13 @@ namespace LuaEngine
                 _logSource.LogInfo($"Running Autorun Script {script.Name} with priority {script.Priority}");
                 script.Run(GlobalScript);
             }
+        }
+
+        public void Reload()
+        {
+            LuaReloadableManager.OnReload();
+            LuaDatabase.Reload();
+            RunScripts();
         }
 
         private void RegisterModules()

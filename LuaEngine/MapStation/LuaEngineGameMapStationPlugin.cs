@@ -10,16 +10,9 @@ namespace LuaEngine.MapStation
 {
     public class LuaEngineGameMapStationPlugin : AGameMapStationPlugin
     {
-        public override void OnAddMapToDatabase(ZipArchive archive, string path, string mapName)
+        public override void OnReload()
         {
-            var luaModEntry = archive.GetEntry("lua.luamod");
-            if (luaModEntry == null)
-                return;
-            var entryStream = luaModEntry.Open();
-            var entryZip = new ZipArchive(entryStream);
-            LuaDatabase.LoadPluginZip(entryZip);
-            entryZip.Dispose();
-            entryStream.Dispose();
+            LuaManager.Instance.Reload();
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace LuaEngine
 {
     [MoonSharpUserData]
-    public class LuaEventHandler
+    public class LuaEventHandler : ILuaReloadable
     {
         private Dictionary<string, DynValue> _callbackByGUID = [];
         private Script _script = null;
@@ -18,6 +18,18 @@ namespace LuaEngine
         public LuaEventHandler(Script script)
         {
             _script = script;
+            LuaReloadableManager.Register(this);
+        }
+
+        [MoonSharpHidden]
+        public void OnReload()
+        {
+            Clear();
+        }
+
+        public void Clear()
+        {
+            _callbackByGUID = [];
         }
 
         public string Add(DynValue callback)

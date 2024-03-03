@@ -24,6 +24,11 @@
   <ItemGroup>
     <ProjectReference Include="..\libs\MapStation\MapStation.Common\MapStation.Common.csproj">
       <Private>False</Private>
+      <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
+    </ProjectReference>
+    <ProjectReference Include="..\libs\MapStation\MapStation.Plugin\MapStation.Plugin.csproj">
+      <Private>False</Private>
+      <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
