@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static LuaEngine.Modules.LuaStageManager;
+using UnityEngine;
 
 namespace LuaEngine.Modules
 {
@@ -47,6 +47,13 @@ namespace LuaEngine.Modules
             public LuaBindings(Script script)
             {
                 _script = script;
+            }
+
+            public void PlacePlayerAt(LuaPlayer player, Table luaPosition, Table luaEulerAngles, bool stopAbility = true)
+            {
+                var pos = LuaMathUtils.TableToVector3(luaPosition);
+                var rot = Quaternion.Euler(LuaMathUtils.TableToVector3(luaEulerAngles));
+                WorldHandler.instance.PlacePlayerAt(player.Handle, pos, rot, stopAbility);
             }
         }
     }
