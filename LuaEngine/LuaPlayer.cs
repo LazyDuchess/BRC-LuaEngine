@@ -13,64 +13,65 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
-        public int MoveStyleEquipped => (int)Handle.moveStyleEquipped;
-        public int MoveStyle => (int)Handle.moveStyle;
-        public float NormalizedHP => Handle.GetNormalizedHP();
+        public bool Grounded => Player.IsGrounded();
+        public int MoveStyleEquipped => (int)Player.moveStyleEquipped;
+        public int MoveStyle => (int)Player.moveStyle;
+        public float NormalizedHP => Player.GetNormalizedHP();
         public float MaxHP
         {
             get
             {
-                return Handle.maxHP;
+                return Player.maxHP;
             }
             set
             {
-                Handle.maxHP = value;
+                Player.maxHP = value;
             }
         }
         public float HP
         {
             get
             {
-                return Handle.HP;
+                return Player.HP;
             }
             set
             {
-                Handle.HP = value;
+                Player.HP = value;
             }
         }
         public string AbilityName
         {
             get
             {
-                if (Handle.ability == null)
+                if (Player.ability == null)
                     return null;
-                return Handle.ability.GetType().Name;
+                return Player.ability.GetType().Name;
             }
         }
-        public bool IsTooBusyForSuddenCutscenes => Handle.IsTooBusyForSuddenCutscenes();
-        public bool IsBusyWithSequence => Handle.IsBusyWithSequence();
-        public bool IsDead => Handle.IsDead();
+        public bool IsTooBusyForSuddenCutscenes => Player.IsTooBusyForSuddenCutscenes();
+        public bool IsBusyWithSequence => Player.IsBusyWithSequence();
+        public bool IsDead => Player.IsDead();
         public bool IsAI
         {
-            get { return Handle.isAI; }
-            set { Handle.isAI = value; }
+            get { return Player.isAI; }
+            set { Player.isAI = value; }
         }
         public float BoostCharge
         {
-            get { return Handle.boostCharge; }
-            set { Handle.boostCharge = value; }
+            get { return Player.boostCharge; }
+            set { Player.boostCharge = value; }
         }
         public float MaxBoostCharge
         {
-            get { return Handle.maxBoostCharge; }
-            set { Handle.maxBoostCharge = value; }
+            get { return Player.maxBoostCharge; }
+            set { Player.maxBoostCharge = value; }
         }
-        public new Player Handle = null;
+        public Player Player = null;
 
         [MoonSharpHidden]
         public LuaPlayer(Player player, Script script) : base(player, script)
         {
-            Handle = player;
+            Player = player;
         }
 
         internal static LuaPlayer CastMethod(Player player)
@@ -78,19 +79,24 @@ namespace LuaEngine
             return new LuaPlayer(player, LuaManager.Instance.GlobalScript);
         }
 
+        public void ForceUnground(bool resetVisual)
+        {
+            Player.ForceUnground(resetVisual);
+        }
+
         public void AddBoostCharge(float amount)
         {
-            Handle.AddBoostCharge(amount);
+            Player.AddBoostCharge(amount);
         }
 
         public void SetRotation(Table forward)
         {
-            Handle.SetRotation(LuaMathUtils.TableToVector3(forward));
+            Player.SetRotation(LuaMathUtils.TableToVector3(forward));
         }
 
         public void SetRotationHard(Table forward)
         {
-            Handle.SetRotHard(LuaMathUtils.TableToVector3(forward));
+            Player.SetRotHard(LuaMathUtils.TableToVector3(forward));
         }
 
         public void GetHit(int damage, Table damageDirection, string knockbackType)
@@ -117,22 +123,22 @@ namespace LuaEngine
                     parsedKnockbackType = KnockbackAbility.KnockbackType.NO_KNOCKBACK;
                     break;
             }
-            Handle.GetHit(damage, LuaMathUtils.TableToVector3(damageDirection), parsedKnockbackType);
+            Player.GetHit(damage, LuaMathUtils.TableToVector3(damageDirection), parsedKnockbackType);
         }
 
         public void ChangeHP(int damage)
         {
-            Handle.ChangeHP(damage);
+            Player.ChangeHP(damage);
         }
 
         public void SetCurrentMoveStyleEquipped(int moveStyle)
         {
-            Handle.SetCurrentMoveStyleEquipped((MoveStyle)moveStyle);
+            Player.SetCurrentMoveStyleEquipped((MoveStyle)moveStyle);
         }
 
         public void SwitchToEquippedMovestyle(bool set, bool doAirTrick, bool showEffect)
         {
-            Handle.SwitchToEquippedMovestyle(set, doAirTrick, true, showEffect);
+            Player.SwitchToEquippedMovestyle(set, doAirTrick, true, showEffect);
         }
     }
 }
