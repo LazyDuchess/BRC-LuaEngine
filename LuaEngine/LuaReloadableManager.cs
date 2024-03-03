@@ -24,9 +24,9 @@ namespace LuaEngine
         internal static void OnReload()
         {
             Purge();
-            foreach(ILuaReloadable reloadable in Reloadables)
+            foreach(var reloadable in Reloadables)
             {
-                reloadable.OnReload();
+                ((ILuaReloadable)reloadable.Target).OnReload();
             }
         }
     }
