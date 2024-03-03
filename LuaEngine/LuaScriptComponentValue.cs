@@ -15,7 +15,7 @@ namespace LuaEngine
         {
             get
             {
-                return new LuaBuiltInComponent(Handle.Value, LuaManager.Instance.GlobalScript);
+                return LuaCastFactory.CastCSharpTypeToLuaType<LuaBuiltInComponent>(Handle.Value);
             }
             set
             {
