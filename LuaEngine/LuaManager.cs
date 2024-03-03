@@ -68,6 +68,9 @@ namespace LuaEngine
 
             var ui = new LuaUI();
             RegisterModule(ui);
+
+            var alarmManager = new LuaAlarmManager();
+            RegisterModule(alarmManager);
         }
 
         private void RegisterModule(ILuaModule module)
