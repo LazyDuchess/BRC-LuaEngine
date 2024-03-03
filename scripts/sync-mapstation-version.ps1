@@ -18,7 +18,7 @@ $packagesLockPath = "LuaEngine.Editor/Packages/packages-lock.json"
 $packagesLock = Get-Content $packagesLockPath -raw | ConvertFrom-Json -AsHashtable
 $packageVersion = $packagesLock["dependencies"]["com.brcmapstation.tools"]["version"]
 
-if($oldPackageVersion == $packageVersion){
+if($oldPackageVersion -eq $packageVersion){
     Write-Host "MapStation dependency is already up-to-date."
     return
 }
