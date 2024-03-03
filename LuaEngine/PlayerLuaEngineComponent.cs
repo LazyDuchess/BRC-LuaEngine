@@ -11,7 +11,21 @@ namespace LuaEngine
 {
     public class PlayerLuaEngineComponent : MonoBehaviour
     {
+        public LuaEventHandler OnLandCombo = null;
+        public LuaEventHandler OnDropCombo = null;
         public Player Player = null;
+
+        private void Awake()
+        {
+            OnLandCombo = new(LuaManager.Instance.GlobalScript);
+            OnDropCombo = new(LuaManager.Instance.GlobalScript);
+        }
+
+        public static PlayerLuaEngineComponent Get(Player player)
+        {
+            var comp = player.gameObject.GetComponent<PlayerLuaEngineComponent>();
+            return comp;
+        }
 
         private void OnCollisionEnter(Collision collision)
         {

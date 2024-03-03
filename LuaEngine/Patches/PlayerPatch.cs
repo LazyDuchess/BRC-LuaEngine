@@ -22,5 +22,29 @@ namespace LuaEngine.Patches
             var luaEngineComponent = __instance.gameObject.AddComponent<PlayerLuaEngineComponent>();
             luaEngineComponent.Player = __instance;
         }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(Player.LandCombo))]
+        private static void LandCombo_Prefix(Player __instance)
+        {
+            if (!__instance.IsComboing())
+                return;
+            var luaEnginePlayer = PlayerLuaEngineComponent.Get(__instance);
+            if (luaEnginePlayer == null)
+                return;
+            luaEnginePlayer.OnLandCombo?.Invoke();
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(nameof(Player.DropCombo))]
+        private static void DropCombo_Prefix(Player __instance)
+        {
+            if (!__instance.IsComboing())
+                return;
+            var luaEnginePlayer = PlayerLuaEngineComponent.Get(__instance);
+            if (luaEnginePlayer == null)
+                return;
+            luaEnginePlayer.OnDropCombo?.Invoke();
+        }
     }
 }

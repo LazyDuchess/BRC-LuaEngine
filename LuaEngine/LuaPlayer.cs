@@ -13,6 +13,8 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
+        public LuaEventHandler OnLandCombo => PlayerLuaEngineComponent.Get(Player)?.OnLandCombo;
+        public LuaEventHandler OnDropCombo => PlayerLuaEngineComponent.Get(Player)?.OnDropCombo;
         public bool IsComboing
         {
             get
@@ -168,6 +170,30 @@ namespace LuaEngine
         public void SwitchToEquippedMovestyle(bool set, bool doAirTrick, bool showEffect)
         {
             Player.SwitchToEquippedMovestyle(set, doAirTrick, true, showEffect);
+        }
+
+        public void LandCombo()
+        {
+            Player.LandCombo();
+        }
+
+        public void DropCombo()
+        {
+            Player.DropCombo();
+        }
+
+        public void AddScoreMultiplier()
+        {
+            Player.AddScoreMultiplier();
+        }
+
+        public void DoTrick(string trickName, int score)
+        {
+            Player.currentTrickPoints = score;
+            Player.currentTrickType = Player.TrickType.HANDPLANT;
+            Player.currentTrickName = trickName;
+            Player.currentTrickOnFoot = !Player.usingEquippedMovestyle;
+            Player.baseScore += (float)((int)((float)Player.currentTrickPoints * Player.scoreFactor));
         }
     }
 }
