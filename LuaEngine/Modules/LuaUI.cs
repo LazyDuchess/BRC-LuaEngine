@@ -72,6 +72,16 @@ namespace LuaEngine.Modules
                 }
                 GameplayCamera.StartScreenShake(parsedScreenShakeType, duration, continuous);
             }
+
+            public void FadeInAndOut(float durationIn, float durationStay, float durationOut)
+            {
+                Core.Instance.BaseModule.uiManager.effects.FadeInAndOutBlack(durationIn, durationStay, durationOut);
+            }
+
+            public void ShowNotification(string text)
+            {
+                Core.Instance.BaseModule.uiManager.ShowNotification(text);
+            }
         }
     }
 }
