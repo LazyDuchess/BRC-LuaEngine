@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaEngine", "LuaEngine\LuaE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapStation.Common", "libs\MapStation\MapStation.Common\MapStation.Common.csproj", "{F139E42D-FDA3-40CC-BE05-9A097897255B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaEngine.Runtime", "LuaEngine.Editor\LuaEngine.Runtime.csproj", "{E7113375-B293-FE46-6D4F-65020F8E0177}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaEngine.Editor", "LuaEngine.Editor\LuaEngine.Editor.csproj", "{0F13B5A5-0F29-14D0-99FD-DDCC29597DB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7113375-B293-FE46-6D4F-65020F8E0177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7113375-B293-FE46-6D4F-65020F8E0177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7113375-B293-FE46-6D4F-65020F8E0177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7113375-B293-FE46-6D4F-65020F8E0177}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F13B5A5-0F29-14D0-99FD-DDCC29597DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F13B5A5-0F29-14D0-99FD-DDCC29597DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F13B5A5-0F29-14D0-99FD-DDCC29597DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F13B5A5-0F29-14D0-99FD-DDCC29597DB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
