@@ -205,6 +205,19 @@ namespace LuaEngine
             Player.currentTrickName = trickName;
             Player.currentTrickOnFoot = !Player.usingEquippedMovestyle;
             Player.baseScore += (float)((int)((float)Player.currentTrickPoints * Player.scoreFactor));
+            if (Player.scoreMultiplier == 0f)
+                Player.scoreMultiplier = 1f;
+            if (Player.tricksInCombo == 0 && Player.ui != null)
+            {
+                Player.ui.SetTrickingChargeBarActive(true);
+            }
+            Player.tricksInCombo++;
+            if (Player.tricksInCombo >= 5)
+            {
+                float num = Player.gainBoostChargeCurve.Evaluate(Mathf.Min((float)Player.tricksInCombo, 50f) / 50f);
+                Player.showAddCharge = num;
+                Player.AddBoostCharge(num);
+            }
         }
 
         public void PlayVoice(int audioClipID, int voicePriority, bool fromPlayer = true)
