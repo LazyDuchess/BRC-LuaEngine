@@ -40,7 +40,9 @@ namespace LuaEngine
         public static T CastCSharpTypeToLuaType<T>(object CSharpObject) where T : class
         {
             if (CastFromCSharpType.TryGetValue(CSharpObject.GetType(), out var cast))
-                return cast.CastMethod(CSharpObject) as T;
+            {
+                return cast.CastMethod.DynamicInvoke(CSharpObject) as T;
+            }
             return null;
         }
 
