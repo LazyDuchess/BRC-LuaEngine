@@ -71,6 +71,9 @@ namespace LuaEngine
 
             var alarmManager = new LuaAlarmManager();
             RegisterModule(alarmManager);
+
+            var sequenceHandler = new LuaSequenceHandler();
+            RegisterModule(sequenceHandler);
         }
 
         private void RegisterModule(ILuaModule module)
