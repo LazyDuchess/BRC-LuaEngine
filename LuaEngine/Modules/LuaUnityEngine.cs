@@ -26,10 +26,15 @@ namespace LuaEngine.Modules
                 _script = script;
             }
 
-            public List<ScriptBehavior> FindScriptBehaviors(string scriptName, bool includeInactive)
+            public List<LuaScriptBehavior> FindScriptBehaviors(string scriptName, bool includeInactive)
             {
                 var scripts = GameObject.FindObjectsOfType<ScriptBehavior>(includeInactive).Where(script => script.LuaScriptName == scriptName);
-                return scripts.ToList();
+                var newList = new List<LuaScriptBehavior>();
+                foreach(var script in scripts)
+                {
+                    newList.Add(new LuaScriptBehavior(script, LuaManager.Instance.GlobalScript));
+                }
+                return newList;
             }
 
             public List<LuaGameObject> GetGameObjects(bool includeInactive)
