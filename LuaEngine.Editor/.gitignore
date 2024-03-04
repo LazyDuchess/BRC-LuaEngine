@@ -3,6 +3,10 @@
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
 
+BRCMapToolkitPreferences.*
+Assets/Temp/
+Assets/Temp.meta
+
 [Pp]ackages/packages-lock.json
 
 /[Ll]ibrary/
