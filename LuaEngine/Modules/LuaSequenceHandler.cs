@@ -34,7 +34,8 @@ namespace LuaEngine.Modules
             {
                 var gameplayEventGO = new GameObject("Lua Sequence Event");
                 var gameplayEvent = gameplayEventGO.AddComponent<SequenceEvent>();
-                if (OnSequenceEnd != null)
+                gameplayEvent.Director = director.PlayableDirector;
+                if (OnSequenceEnd != null && OnSequenceEnd.Type == DataType.Function)
                     gameplayEvent.OnSequenceEnd.Add(OnSequenceEnd);
                 SequenceHandler.instance.StartEnteringSequence(director.PlayableDirector, gameplayEvent, hidePlayer, interruptPlayer, instantly, pausePlayer, allowPhoneOnAfterSequence, null, skippable, lowerVolume);
             }
