@@ -18,12 +18,16 @@ namespace LuaEngine.Editor
         private string MakeLuaZip(string assetPath, string luaPath)
         {
             var luaOutputPath = Path.Combine(assetPath, "lua.luamod");
-            var metaFiles = Directory.GetFiles(luaPath, "*.meta", SearchOption.AllDirectories);
-            foreach(var metaFile in metaFiles)
+            var archive = ZipFile.Open(luaOutputPath, ZipArchiveMode.Create);
+            var luaFiles = Directory.GetFiles(luaPath, "*.lua", SearchOption.AllDirectories);
+            foreach(var luaFile in luaFiles)
             {
-                File.Delete(metaFile);
+                var pathInZip = luaFile.Substring(luaPath.Length);
+                if (pathInZip[0] == '/' || pathInZip[0] == '\\')
+                    pathInZip = pathInZip.Substring(1);
+                archive.CreateEntryFromFile(luaFile, pathInZip);
             }
-            ZipFile.CreateFromDirectory(luaPath, luaOutputPath);
+            archive.Dispose();
             return luaOutputPath;
         }
 
