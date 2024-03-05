@@ -14,6 +14,6 @@ public static class DeveloperEditor
         var mapsPath = "Assets/Maps";
         if (!Directory.Exists(outputPath))
             Directory.CreateDirectory(outputPath);
-        AssetDatabase.ExportPackage(new string[] { mapsPath }, Path.Combine(outputPath, $"MapStation Example Maps {LuaEngineVersion.Version}.unitypackage"), ExportPackageOptions.Recurse);
+        AssetDatabase.ExportPackage(new string[] { mapsPath }, Path.Combine(outputPath, $"MapStation.Example.Maps-{LuaEngineVersion.Version}.unitypackage"), ExportPackageOptions.Recurse);
     }
 }
