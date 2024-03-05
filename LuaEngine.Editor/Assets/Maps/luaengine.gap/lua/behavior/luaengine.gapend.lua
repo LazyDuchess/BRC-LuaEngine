@@ -1,1 +1,1 @@
--- Hi :)
+-- All the code for gaps is in the gapstart script - This is only here so we have access to events like OnPlayerTriggerEnter.

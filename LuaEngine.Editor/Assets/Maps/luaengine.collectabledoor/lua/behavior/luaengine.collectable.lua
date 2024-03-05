@@ -1,5 +1,6 @@
 -- Called before the first frame update.
 local function Start()
+	-- Increase the total collectables global to account for this one.
 	CollectableExample.TotalCollectables = CollectableExample.TotalCollectables + 1
 end
 
