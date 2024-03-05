@@ -44,15 +44,28 @@ namespace LuaEngine
             return script;
         }
 
+        private DynValue DoString(Script script, string body, string name)
+        {
+            try
+            {
+                return script.DoString(body, null, name);
+            }
+            catch (InterpreterException e)
+            {
+                UnityEngine.Debug.LogError($"Error executing lua script {name}!{Environment.NewLine}{e.DecoratedMessage}");
+            }
+            return null;
+        }
+
         public void Run(Script script)
         {
-            script.DoString(Body, null, Name);
+            DoString(script, Body, Name);
         }
 
         public void RunForScriptBehavior(Script script, LuaScriptBehavior scriptBehavior)
         {
             var contextBody = AddLocalContext(script, Body, "script", scriptBehavior);
-            script.DoString(contextBody, null, Name);
+            DoString(script, contextBody, Name);
             RemoveLocalContext(script, "script");
         }
 

@@ -44,6 +44,19 @@ namespace LuaEngine
             }
         }
 
+        public DynValue Call(DynValue function, params object[] args)
+        {
+            try
+            {
+                return GlobalScript.Call(function, args);
+            }
+            catch(InterpreterException e)
+            {
+                Debug.LogError($"Error executing lua function!{Environment.NewLine}{e.DecoratedMessage}");
+            }
+            return null;
+        }
+
         private void RegisterModules()
         {
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();

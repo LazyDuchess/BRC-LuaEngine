@@ -218,6 +218,7 @@ namespace LuaEngine
                 Player.showAddCharge = num;
                 Player.AddBoostCharge(num);
             }
+            Player.moveInScoreTimer = 1f;
         }
 
         public void PlayVoice(int audioClipID, int voicePriority, bool fromPlayer = true)
