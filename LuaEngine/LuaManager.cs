@@ -68,11 +68,34 @@ namespace LuaEngine
 
         private void RegisterModules()
         {
+            /*
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (var element in assemblies)
             {
                 UserData.RegisterAssembly(element);
-            }
+            }*/
+
+            UserData.RegisterType<LuaAnimator>();
+            UserData.RegisterType<LuaAudioSource>();
+            UserData.RegisterType<LuaBuiltInBehaviour>();
+            UserData.RegisterType<LuaBuiltInComponent>();
+            UserData.RegisterType<LuaEventHandler>();
+            UserData.RegisterType<LuaGameObject>();
+            UserData.RegisterType<LuaPlayableDirector>();
+            UserData.RegisterType<LuaPlayer>();
+            UserData.RegisterType<LuaScriptBehavior>();
+            UserData.RegisterType<LuaScriptComponentValue>();
+            UserData.RegisterType<LuaScriptGameObjectValue>();
+            UserData.RegisterType<LuaScriptNumberValue>();
+            UserData.RegisterType<LuaScriptStringValue>();
+            UserData.RegisterType<LuaScriptValue>();
+            UserData.RegisterType<LuaAlarmManager>();
+            UserData.RegisterType<LuaCore>();
+            UserData.RegisterType<LuaSequenceHandler>();
+            UserData.RegisterType<LuaStageManager>();
+            UserData.RegisterType<LuaUI>();
+            UserData.RegisterType<LuaUnityEngine>();
+            UserData.RegisterType<LuaWorldHandler>();
 
             _logSource.LogInfo($"Registering Lua modules");
 
