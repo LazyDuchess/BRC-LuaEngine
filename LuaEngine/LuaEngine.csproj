@@ -3,7 +3,7 @@
     <TargetFramework>net471</TargetFramework>
     <AssemblyName>LuaEngine</AssemblyName>
     <Description>LuaEngine Plugin for BRC.</Description>
-    <Version>0.2.1</Version>
+    <Version>0.3.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>12.0</LangVersion>
   </PropertyGroup>

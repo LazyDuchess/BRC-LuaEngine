@@ -1,6 +1,6 @@
 {
   "name": "LuaEngine",
-  "version_number": "0.2.1",
+  "version_number": "0.3.0",
   "website_url": "https://github.com/LazyDuchess/BRC-LuaEngine",
   "description": "WIP Experimental Lua Scripting engine.",
   "dependencies": [
