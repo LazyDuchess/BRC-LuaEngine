@@ -38,5 +38,20 @@ namespace LuaEngine
                     WorldHandler.instance.CurrentCamera.gameObject.SetActive(false);
             }
         }
+
+        public void Play()
+        {
+            PlayableDirector.Play();
+        }
+
+        public void Pause()
+        {
+            PlayableDirector.Pause();
+        }
+
+        public void Stop()
+        {
+            PlayableDirector.Stop();
+        }
     }
 }
