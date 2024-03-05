@@ -23,7 +23,8 @@ function CollectableExample.Reset()
 	-- Find all objects with the "luaengine.collectable.lua" script.
 	local collectables = Engine.FindScriptBehaviors("luaengine.collectable.lua", true)
 	for k, v in pairs(collectables) do
-		v.GameObject.Active = true
+		local visuals = v.GameObject.GetGameObjectValue("luaengine.collectable.visuals").Value
+		visuals.Active = true
 	end
 	CollectableDirector.SkipTo(0)
 end
