@@ -8,4 +8,5 @@ This mod adds Lua Scripting support to Bomb Rush Cyberfunk. Additionally, it all
 
 ## How To Use
 
+Check out the latest release for a Unity Package with MapStation example maps using Lua: https://github.com/LazyDuchess/BRC-LuaEngine/releases/latest
 Check out the Wiki: https://github.com/LazyDuchess/BRC-LuaEngine/wiki
