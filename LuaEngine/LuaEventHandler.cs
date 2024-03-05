@@ -37,12 +37,11 @@ namespace LuaEngine
             }
         }
 
-        [MoonSharpHidden]
         public void Invoke(params object[] args)
         {
             foreach(var callback in _callbackByGUID)
             {
-                _script.Call(callback.Value, args);
+                LuaManager.Instance.Call(callback.Value, args);
             }
         }
     }
