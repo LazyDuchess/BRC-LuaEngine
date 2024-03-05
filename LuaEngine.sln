@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LuaEngine", "LuaEngine\LuaE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapStation.Common", "libs\MapStation\MapStation.Common\MapStation.Common.csproj", "{F139E42D-FDA3-40CC-BE05-9A097897255B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapStation.Plugin", "libs\MapStation\MapStation.Plugin\MapStation.Plugin.csproj", "{B48B8B8C-A850-43D5-8D8B-B22064DDB8D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F139E42D-FDA3-40CC-BE05-9A097897255B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B48B8B8C-A850-43D5-8D8B-B22064DDB8D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B48B8B8C-A850-43D5-8D8B-B22064DDB8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B48B8B8C-A850-43D5-8D8B-B22064DDB8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B48B8B8C-A850-43D5-8D8B-B22064DDB8D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
