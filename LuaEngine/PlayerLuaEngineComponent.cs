@@ -11,6 +11,7 @@ namespace LuaEngine
 {
     public class PlayerLuaEngineComponent : MonoBehaviour
     {
+        public bool AllowClimb = true;
         public LuaEventHandler OnLandCombo = null;
         public LuaEventHandler OnDropCombo = null;
         public Player Player = null;

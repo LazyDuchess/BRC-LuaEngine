@@ -44,6 +44,7 @@ namespace LuaEngine.Modules
         [MoonSharpUserData]
         public class LuaBindings
         {
+            public string LuaEngineVersion => PluginInfo.PLUGIN_VERSION;
             public float DeltaTime => Core.dt;
             public LuaEventHandler OnAlwaysUpdate = null;
             public LuaEventHandler OnFixedUpdate = null;

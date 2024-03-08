@@ -13,6 +13,18 @@ namespace LuaEngine
     [MoonSharpUserData]
     public class LuaPlayer : LuaBuiltInBehaviour
     {
+        public bool AllowClimb
+        {
+            get
+            {
+                return PlayerLuaEngineComponent.Get(Player).AllowClimb;
+            }
+
+            set
+            {
+                PlayerLuaEngineComponent.Get(Player).AllowClimb = value;
+            }
+        }
         public bool UserInputEnabled
         {
             get
