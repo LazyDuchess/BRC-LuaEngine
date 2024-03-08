@@ -8,7 +8,7 @@ using Reptile;
 
 namespace LuaEngine.Patches
 {
-    [HarmonyPatch(nameof(LedgeClimbAbility))]
+    [HarmonyPatch(typeof(LedgeClimbAbility))]
     internal static class LedgeClimbAbilityPatch
     {
         [HarmonyPrefix]
