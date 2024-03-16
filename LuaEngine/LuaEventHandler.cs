@@ -53,6 +53,8 @@ namespace LuaEngine
         {
             foreach(var callback in _callbackByGUID)
             {
+                if (callback.Value == null || callback.Value.IsNilOrNan())
+                    continue;
                 LuaManager.Instance.Call(callback.Value, args);
             }
         }
