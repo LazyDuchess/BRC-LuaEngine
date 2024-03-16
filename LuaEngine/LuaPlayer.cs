@@ -237,5 +237,10 @@ namespace LuaEngine
         {
             Player.PlayVoice((AudioClipID)audioClipID, (VoicePriority)voicePriority, fromPlayer);
         }
+
+        public void RegainAirMobility()
+        {
+            Player.RegainAirMobility();
+        }
     }
 }
