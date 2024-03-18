@@ -120,6 +120,13 @@ namespace LuaEngine
             get { return Player.maxBoostCharge; }
             set { Player.maxBoostCharge = value; }
         }
+
+        public Table Velocity
+        {
+            get { return LuaMathUtils.Vector3ToTable(Player.motor.velocity); }
+            set { Player.motor.velocity = LuaMathUtils.TableToVector3(value); }
+        }
+
         public Player Player = null;
 
         [MoonSharpHidden]
